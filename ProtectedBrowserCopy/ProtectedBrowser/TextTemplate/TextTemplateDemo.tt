@@ -1,0 +1,13 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<# var className = new string [] {"className1", "className2", "className3"}; #>  
+<# var properties = new string [] {"Id", "Name", "Email"}; #>  
+// This is generated code:  
+
+	
+

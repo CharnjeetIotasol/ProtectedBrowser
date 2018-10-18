@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="d-height col-md-4">
+        <ul class="nav nav-stacked" id="accordion1">
+            <li class="panel">
+                <a data-toggle="collapse" href="#rootFolder" aria-expanded="true">
+                    <img class="height-25" src="images/folder.png" />
+                    <span>ProtectedBrowserFiles</span>
+                </a>
+                <ul id="rootFolder" class="collapse in">
+                    <!--Parent Folders-->
+                    <li data-ng-repeat="(key , folder) in vm.folderData.Folders" ng-click="!vm.isProcessInrequesting ? vm.getChildFolderDetails(folder.Name, 'child-0-'+key+'', $event) : '';">
+                        <a data-toggle="collapse" href="#child-0-{{key}}">
+                            <span><img class="height-25 margin-right-5" src="images/folder.png" />{{folder.Name}}</span>
+                        </a>
+                    </li>
+
+                    <!--Parent Files-->
+                    <li class="file-li" data-ng-repeat="file in vm.folderData.Files" ng-click="!vm.isProcessInrequesting ? vm.viewFile(vm.encrypt(file.Path), file.Ext, $event) : '';">
+                        <span><img class="height-17 margin-right-5" src="images/file.png" />{{file.Name}}</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="d-height text-center col-md-7">
+        <div id="file-container">
+
+        </div>
+        <img id="crop-viewer" />
+    </div>
+    <div class="d-height col-md-1">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" ng-click="vm.closeNav()">
+                <i class="fa fa-chevron-right"></i>
+            </a>
+            <a ng-if="!vm.isCropInProcess" href="javascript:0">
+                <i ng-click="vm.cropImage()" class="fa fa-crop"></i>
+            </a>
+            <!--a ng-if="vm.isCropInProcess" href="javascript:0">
+                <i ng-click="vm.clearCrop()" class="fas fa-times"></i>
+            </a-->
+            <a ng-if="vm.isCropInProcess" href="javascript:0">
+                <i ng-click="vm.print()" class="fas fa-print"></i>
+            </a>
+        </div>
+      
+        <span id="open-btn" ng-click="vm.openNav()"><i class="fa fa-chevron-left"></i></span>
+    </div>
+</div>
+

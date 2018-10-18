@@ -1,0 +1,118 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html data-ng-app="applicationApp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <base href="/">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="~/wwwroot/scss/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Recover</title>
+     <style>
+    	[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+		  display: none !important;
+		}
+    </style>
+</head>
+<body class="ng-cloak">
+    <div data-ng-controller="RecoverPasswordController as vm"> 
+        <!--half screen background section-->
+        <section class="material-half-bg">
+            <div class="cover"></div>
+        </section>
+
+        <!--recover password form section-->
+        <section class="login-content">
+            <div class="logo">
+                <h1>Welcome to Application</h1>
+            </div>
+            <div class="login-box">
+
+                <!-- recover form -->
+                <form class="login-form" name="recoverForm" novalidate="novalidate">
+                    <h3 class="login-head"><span class="lnr lnr-lock header-icon"></span>{{"RECOVER PASSWORD" | translate}}</h3>
+                    <div class="form-group" data-ng-class="{'has-error':(recoverForm.password.$error.required) && vm.onClickValidation}">
+                        <label class="control-label">{{"PASSWORD" | translate}}</label>
+                        <input class="form-control" type="password" placeholder="Enter New Password" name="password" data-ng-model="vm.password" required="required" autofocus>
+                        <div class="error-message" data-ng-if="recoverForm.password.$error.required && vm.onClickValidation">{{"PASSWORD IS REQUIRED" | translate}}</div>
+                    </div>
+                    <div class="form-group" data-ng-class="{'has-error':(recoverForm.confirmPassword.$error.required && vm.onClickValidation) || vm.confirmPassword !== vm.password} ">
+                        <label class="control-label">{{"CONFIRM PASSWORD" | translate}}</label>
+                        <input class="form-control" type="password" placeholder="Confirm Password" name="confirmPassword" data-ng-model="vm.confirmPassword" required="required">
+                        <div class="error-message" data-ng-if="recoverForm.confirmPassword.$error.required && vm.onClickValidation">{{"CONFIRM PASSWORD IS REQUIRED" | translate}}</div>
+                    </div>
+                    <div class="form-group btn-container">
+                        <button class="btn btn-primary btn-block btn-lg" data-ng-click="vm.resetPassword(recoverForm.$valid)">{{"RECOVER PASSWORD" | translate}}</button>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+
+    </div>
+  	<script>
+        var apiBaseUrl = '/';
+        var secureApiBaseUrl = apiBaseUrl + "/api/";
+        var publicApiBaseUrl = apiBaseUrl;
+
+    </script>
+    <!-- Common Files -->
+    <script type="text/javascript" src="~/wwwroot/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="~/wwwroot/js/plugins/moment.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/sweetalert.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/chart.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/jquery-ui.custom.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/select2.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/pace.min.js"></script>
+
+    <script type="text/javascript" src="~/wwwroot/js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/angular/angular-resource.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/dirPagination.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/angular-file-upload.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/angular-translate.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/angular-translate-loader-static-files.js"></script>
+
+    <script type="text/javascript" src="~/wwwroot/js/main.js"></script>
+
+    <!-- Application Base Files -->
+    <script type="text/javascript" src="~/wwwroot/app.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/common.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/common/commonService.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/common/commonUtils.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/interceptor/auth.interceptor.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/signIn/oAuthValidateService.js"></script>
+
+    <!--Controllers-->
+    <script type="text/javascript" src="~/wwwroot/angular/signIn/signInController.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/account/accountSettingsController.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/account/changePasswordController.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/account/recoverPasswordController.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/header/headerController.js"></script>
+        	<script type="text/javascript" src="~/wwwroot/angular/pages/Directory/DirectoryListController.js"></script>
+		<script type="text/javascript" src="~/wwwroot/angular/pages/Directory/DirectoryEditController.js"></script>
+		<script type="text/javascript" src="~/wwwroot/angular/pages/Directory/DirectoryDetailController.js"></script>
+	<!--@@NEW_CONTROLLER_FILE_HERE@@  -->
+	
+    <!--Repositories-->
+    <script type="text/javascript" src="~/wwwroot/angular/signIn/signInRepository.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/account/accountRepository.js"></script>
+		<script type="text/javascript" src="~/wwwroot/angular/pages/Directory/DirectoryRepository.js"></script>
+    <!--@@NEW_REPOSITORY_FILE_HERE@@  -->
+</body>
+</html>

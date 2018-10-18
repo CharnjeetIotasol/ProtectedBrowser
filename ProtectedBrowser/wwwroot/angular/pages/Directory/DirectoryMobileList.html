@@ -1,0 +1,33 @@
+<div class="page-title">
+    <div>
+        <h1>Directory</h1>
+        <ul class="breadcrumb side">
+            <li><a data-ui-sref="/" style="color:#676a6d"><i class="lnr lnr-home lnr-md"></i></a></li>
+            <li class="active"><a data-ui-sref="directory">Directory</a></li>
+        </ul>
+    </div>
+</div>
+<div class="col-md-12 no-padding">
+    <div class="card">
+        <div class="card-body">
+            <div class="clearfix"></div>
+            <table class="table table-bordered no-margin" id="sampleTable">
+                <tbody>
+                	<tr data-ng-repeat="record in vm.recordList" data-on-finish-render data-broadcasteventname="ngRepeatBroadcast1">
+                        		<td>{{record.id}}</td>
+                        		<td>{{record.createdBy}}</td>
+                        		<td>{{record.createdOn|date:'MM/dd/yyyy hh:mm'}}</td>
+                        		<td>{{record.rootPath}}</td>
+                        		<td>{{record.userName}}</td>
+                        		<td>{{record.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<a class="add-buttom-site" data-ui-sref="directoryEdit">
+    <i class="lnr lnr-plus-circle"></i>
+</a>
+

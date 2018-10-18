@@ -1,0 +1,67 @@
+<div class="page-title">
+    <div>
+        <h1>User List</h1>
+        <ul class="breadcrumb side">
+            <li><a data-ui-sref="/" style="color:#676a6d"><i class="lnr lnr-home lnr-md"></i></a></li>
+            <li class="active"><a>Users</a></li>
+        </ul>
+    </div>
+    <div>
+        <a data-toggle="tooltip" data-placement="top" title="Add" class="btn btn-primary btn-flat" data-ui-sref="AddUser({id:0})"><i class="lnr lnr-plus-circle lnr-md"></i></a>
+        <a data-toggle="tooltip" data-placement="top" title="Edit" class="btn btn-primary btn-flat" data-ng-show="vm.selectedRecords.length==1" data-ui-sref="AddUser({id:vm.selectedRecord.id})"><i class="lnr lnr-pencil lnr-md"></i></a>
+        <!--<a data-toggle="tooltip" data-placement="top" title="View" class="btn btn-primary btn-flat" data-ng-show="vm.selectedRecords.length==1" data-ui-sref="AddressDetail({id:vm.selectedRecord.id})"><i class="lnr lnr-eye lnr-md"></i></a>-->
+        <a data-toggle="tooltip" data-placement="top" title="Refresh" class="btn btn-info btn-flat" data-ng-click="vm.init()"><i class="lnr lnr-redo lnr-md"></i></a>
+        <!--<a data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-warning btn-flat" data-ng-show="vm.selectedRecords.length>0" data-ng-click="vm.remove(vm.selectedRecord.id)"><i class="lnr lnr-trash lnr-md"></i></a>-->
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body table-responsive">
+                <table class="table table-bordered custom-table" id="sampleTable">
+                    <thead>
+                        <tr>
+                            <th class="checkbox-header-container">
+                                <div class="animated-checkbox">
+                                    <label>
+                                        <input type="checkbox" data-ng-change="vm.selectAll(vm.allSelected)" data-ng-model="vm.allSelected"><span class="label-text"></span>
+                                    </label>
+                                </div>
+                            </th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>RoleName</th>
+                            <th>Is Active</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="record in vm.userList" data-on-finish-render data-broadcasteventname="ngRepeatBroadcast1">
+                            <td>
+                                <div class="animated-checkbox">
+                                    <label>
+                                        <input type="checkbox" name="selected" data-ng-model="record.isSelected" data-ng-change="vm.selectRecord(record)"><span class="label-text"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>{{record.firstName}} {{record.lastName}}</td>
+                            <td>{{record.email}}</td>
+                            <td>{{record.phoneNumber}}</td>
+                            <td><span data-ng-if="record.roleName === 'ROLE_ADMIN'">ADMIN</span> <span data-ng-if="record.roleName === 'ROLE_RECEPTIONIST'">RECEPTIONIST</span></td>
+                            <td>
+                                <div class="toggle">
+                                    <label>
+                                        <input type="checkbox" data-ng-checked="record.isActive" data-ng-click="vm.userStatusChange(record)"><span class="button-indecator" ></span>
+                                    </label>
+                                </div>
+                            </td>
+                           
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

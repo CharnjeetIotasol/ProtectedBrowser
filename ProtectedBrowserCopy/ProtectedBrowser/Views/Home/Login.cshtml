@@ -1,0 +1,147 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html data-ng-app="applicationApp">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <base href="/">
+    @* <link rel="stylesheet" href="~/wwwroot/js/jquery-ui/jquery-ui.min.css" />*@
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="~/wwwroot/scss/main.css" />
+    <title>Login</title>
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+
+        .login-content .login-box {
+            min-height: 430px;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        html, body, .login-content {
+            height: 100%;
+        }
+    </style>
+
+    <title>Login</title>
+</head>
+<body class="ng-cloak">
+    <div data-ng-controller="SignInController as vm" style="height:100%;">
+        <section class="material-half-bg">
+            <div class="cover"></div>
+        </section>
+
+        <section class="login-content">
+            <div class="logo">
+                <h1>Welcome to Application</h1>
+            </div>
+            <div class="login-box">
+
+                <!-- sign in form -->
+                <form class="login-form" name="loginForm" novalidate="novalidate">
+                    <h3 class="login-head"><span class="lnr lnr-user header-icon"></span>{{"SIGN IN" | translate}}</h3>
+                    <div class="form-group" data-ng-class="{'has-error':(loginForm.username.$error.required || loginForm.username.$error.email) && vm.onClickValidation}">
+                        <label class="control-label">{{"Email" | translate}}</label>
+                        <input class="form-control" type="email" placeholder="Enter Username" name="username" data-ng-model="vm.username" required="required" autofocus>
+                        <div class="error-message" data-ng-if="loginForm.username.$invalid">
+                            <div data-ng-if="loginForm.username.$error.email">{{"INVALID EMAIL" | translate}}</div>
+                            <div data-ng-if="loginForm.username.$error.required && vm.onClickValidation">{{"EMAIL IS REQUIRED" | translate}}</div>
+                        </div>
+                    </div>
+                    <div class="form-group" data-ng-class="{'has-error':loginForm.password.$error.required && vm.onClickValidation}">
+                        <label class="control-label">{{"PASSWORD" | translate}}</label>
+                        <input class="form-control" type="password" placeholder="Enter Password" name="password" data-ng-model="vm.password" required="required">
+                        <div class="error-message" data-ng-if="loginForm.username.$error.required && vm.onClickValidation">{{"PASSWORD IS REQUIRED" | translate}}</div>
+                    </div>
+                    <div class="form-group">
+                        <div class="utility">
+                            <div class="animated-checkbox">
+                                <label class="semibold-text">
+                                    <input type="checkbox"><span class="label-text">{{"STAY SIGNED IN" | translate}}</span>
+                                </label>
+                            </div>
+                            <p class="semibold-text mb-0"><a data-toggle="flip">{{"FORGOT PASSWORD" | translate}} ?</a></p>
+                        </div>
+                    </div>
+                    <div class="form-group btn-container">
+                        <button class="btn btn-primary btn-block btn-lg" data-ng-click="vm.signIn(loginForm.$valid)">{{"SIGN IN" | translate}}</button>
+                    </div>
+                </form>
+
+                <!--forget password screen-->
+                <form class="forget-form" name="resetPasswordForm" novalidate="novalidate">
+                    <h3 class="login-head"><span class="lnr lnr-lock header-icon"></span>{{"FORGOT PASSWORD" | translate}} ?</h3>
+                    <div class="form-group" data-ng-class="{'has-error':(resetPasswordForm.remail.$error.required || resetPasswordForm.remail.$error.email) && vm.onClickValidation}">
+                        <label class="control-label">{{"Email" | translate}}</label>
+                        <input class="form-control" type="email" name="remail" placeholder="Email" data-ng-model="vm.recoverEmail" required="required" autofocus>
+                        <div class="error-message" data-ng-if="resetPasswordForm.remail.$invalid">
+                            <div data-ng-if="resetPasswordForm.remail.$error.email">{{"INVALID EMAIL" | translate}}</div>
+                            <div data-ng-if="resetPasswordForm.remail.$error.required && vm.onClickValidation">{{"EMAIL IS REQUIRED" | translate}}</div>
+                        </div>
+                    </div>
+                    <div class="form-group btn-container">
+                        <button class="btn btn-primary btn-block btn-lg" data-ng-click="vm.resetPassword(resetPasswordForm.$valid)">{{"RESET" | translate}}</button>
+                    </div>
+                    <div class="form-group mt-20">
+                        <p class="semibold-text mb-0"><a id="backToSignIn" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i>{{"BACK TO LOGIN" | translate}}</a></p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <!-- Common Files Start -->
+    <script type="text/javascript" src="~/wwwroot/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/moment.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/sweetalert.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/chart.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/jquery-ui.custom.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/select2.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/pace.min.js"></script>
+
+    <script type="text/javascript" src="~/wwwroot/js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/angular/angular-resource.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/angular-ui-router.min.js"></script>
+
+    <script type="text/javascript" src="~/wwwroot/js/dirPagination.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/angular-file-upload.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/angular-translate.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/angular-translate-loader-static-files.js"></script>
+    <!-- Common Files End -->
+    <!-- Application Base Files Start -->
+    <script type="text/javascript" src="~/wwwroot/app.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/common.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/common/commonService.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/common/commonUtils.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/interceptor/auth.interceptor.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/signIn/oAuthValidateService.js"></script>
+    <!-- Application Base Files End -->
+    <!-- Controller start-->
+    <script type="text/javascript" src="~/wwwroot/angular/signIn/signInController.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/account/accountSettingsController.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/account/changePasswordController.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/account/recoverPasswordController.js"></script>
+    <!-- Controller End -->
+    <!-- Service Start-->
+    <script type="text/javascript" src="~/wwwroot/angular/signIn/signInRepository.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/account/accountRepository.js"></script>
+    <!-- Service End -->
+</body>
+</html>

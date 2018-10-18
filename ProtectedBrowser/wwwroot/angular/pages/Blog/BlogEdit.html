@@ -1,0 +1,76 @@
+<div class="breadcrumb-container">
+	<ol class="breadcrumb">
+		<li><a href="#">Home</a></li>
+		<li><a data-ui-sref="BlogList">Blogs</a></li>
+		<li class="active">{{vm.isNewRecord?'New Blog':'Update '+vm.record.name}}</li>
+	</ol>
+</div>
+
+<div class="panel panel-primary edit-page-form">
+	<div class="panel-heading">
+		<h3 class="panel-title">{{vm.isNewRecord?'New Blog':'Update '+vm.record.name}}</h3>
+	</div>
+	<div class="panel-body">
+		<form name="recordForm" novalidate="novalidate">
+			<h3 class="form-sub-title">Basic Info</h3>
+			<hr class="margin-bottom-40">
+			<div class="row">
+				<div class="col-md-4 col-md-offset-1">
+					<div class="form-group row" data-ng-class="{'has-error':recordForm.CategoryId.$error.required && vm.onClickValidation}">
+						<label class="control-label">Category</label>
+						<div class="col-md-12 no-padding">
+							<select class="form-control" data-ng-options="category.id as category.name for category in vm.categoryList" data-ng-model="vm.record.categoryId" name="CategoryId" required="required">
+								<option value="">Select Category </option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-md-offset-2">
+					<div class="form-group has-danger row" data-ng-class="{'has-error':recordForm.title.$error.required && vm.onClickValidation}">
+						<label class="control-label">Title</label>
+						<div class="col-md-12 no-padding">
+							<input class="form-control" type="text" name="title" required="required" data-ng-model="vm.record.title">
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-md-10 col-md-offset-1">
+					<div class="form-group row" data-ng-class="{'has-error':recordForm.description.$error.required && vm.onClickValidation}">
+						<label class="control-label">Description</label>
+						<div class="clearfix"></div>
+						<div class="col-md-12 no-padding">
+							<textarea class="form-control" ui-tinymce="vm.tinymceOptions" rows="15" data-ng-model="vm.record.description" required="required" name="description"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-md-4 col-md-offset-1" data-ng-class="{'has-error':recordForm.type.$error.required && vm.onClickValidation}">
+					<div class="form-group has-danger row">
+						<label class="control-label text-right">Active</label>
+						<div class="material-switch">
+							<input id="someSwitchOptionPrimary" name="someSwitchOption001" type="checkbox" data-ng-model="vm.record.isActive" />
+							<label for="someSwitchOptionPrimary" class="label-primary"></label>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+				<div class="col-md-10 col-md-offset-1 no-padding">
+					<button class="btn btn-default fileinput-button" data-ng-if="vm.record.file==null  || !vm.record.file.fileUrl">
+						Upload File
+						<input class="form-control" type="file" nv-file-select="" uploader="vm.uploader" accept="image/gif, image/jpeg" />
+					</button>
+					<div class="upload-image-container" data-ng-if="vm.record.file.fileUrl">
+						<img data-ng-src="{{vm.record.file.fileUrl}}" width="125" height="125" alt="{{vm.record.file.fileName}}" style="margin-bottom:10px;" />
+						<i class="upload-doc-delete glyphicon glyphicon-remove" data-ng-click="vm.remove(vm.record.file.id)"></i>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="panel-footer text-right">
+		<button class="btn btn-primary site-button" type="button" data-ng-click="vm.save(recordForm.$valid)">
+			<i class="lnr lnr-checkmark-circle"></i> Save</button>
+		<a class="btn btn-default site-cancel-button" type="button" data-ui-sref="BlogList">
+			<i class="lnr lnr-cross-circle "></i> Cancel</a>
+	</div>
+</div>

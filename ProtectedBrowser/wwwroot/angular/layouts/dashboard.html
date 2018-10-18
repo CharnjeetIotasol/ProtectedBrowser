@@ -1,0 +1,93 @@
+<div class="wrapper">
+	<nav id="sidebar">
+		<div class="sidebar-header">
+			<h3>ProtectedBrowser</h3>
+			<strong>PB</strong>
+		</div>
+
+		<ul class="list-unstyled components">
+			<li data-ng-class="{'active':(_viewPage=='DirectoryList' || _viewPage=='DirectoryEdit' || _viewPage=='DirectoryDetail')}">
+                <a data-ui-sref="DirectoryList">
+                    <i class="glyphicon glyphicon-user"></i>Directory
+                </a>
+            </li>
+			<!--li>
+				<a data-ui-sref="ContactList">
+					<i class="glyphicon glyphicon-send"></i> {{"DASHBOARD.CONTACT" | translate}}
+				</a>
+			</li-->
+			<li data-ng-click="signOff()">
+				<a href="javascript:void(0)">
+					<i class="glyphicon glyphicon-log-out"></i> {{"DASHBOARD.LOGOUT" | translate}}
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<div id="content">
+		<nav class="navbar navbar-default no-margin">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a type="button" id="sidebarCollapse">
+						<img src="/images/menu.png" class="img-responsive" width="28">
+					</a>
+					<a class="hidden-sm hidden-md hidden-lg pull-right user-info-dropdown-mobile" data-toggle="collapse" role="button" aria-haspopup="true" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">Welcome: {{user.fullName}}</a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right custom-nav-header">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle user-info-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome: {{user.fullName}}</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a data-ng-if="AuthRepository.isAccessible(accountSettings)" data-ng-disabled="AuthRepository.isDisabled(accountSettings)" data-ui-sref="accountSettings">
+										{{"DASHBOARD.ACCOUNT_SETTINGS" | translate}}
+									</a>
+								</li>
+								<li>
+									<a data-ng-if="AuthRepository.isAccessible(changePassword)" data-ng-disabled="AuthRepository.isDisabled(changePassword)" data-ui-sref="changePassword">
+										{{"DASHBOARD.CHANGE_PASSWORD" | translate}}
+									</a>
+								</li>
+								<li>
+									<a data-ng-if="AuthRepository.isAccessible(logout)" data-ng-disabled="AuthRepository.isDisabled(logout)" data-ng-click="signOff()">
+										{{"DASHBOARD.LOGOUT" | translate}}
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+					<ul class="nav navbar-nav navbar-right custom-nav-header">
+						<li>
+							<a data-ng-if="AuthRepository.isAccessible(accountSettings)" data-ng-disabled="AuthRepository.isDisabled(accountSettings)" data-ui-sref="accountSettings">
+								{{"DASHBOARD.ACCOUNT_SETTINGS" | translate}}
+							</a>
+						</li>
+						<li>
+							<a data-ng-if="AuthRepository.isAccessible(changePassword)" data-ng-disabled="AuthRepository.isDisabled(changePassword)" data-ui-sref="changePassword">
+								{{"DASHBOARD.CHANGE_PASSWORD" | translate}}
+							</a>
+						</li>
+						<li>
+							<a data-ng-if="AuthRepository.isAccessible(logout)" data-ng-disabled="AuthRepository.isDisabled(logout)" data-ng-click="signOff()">
+								{{"DASHBOARD.LOGOUT" | translate}}
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="clearfix"></div>
+		<div class="page-outer-container">
+			<div class="page-inner-container" data-ui-view="">
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#sidebarCollapse').on('click', function() {
+			$('#sidebar').toggleClass('active');
+		});
+	});
+</script>

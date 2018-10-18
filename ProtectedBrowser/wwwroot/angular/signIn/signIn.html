@@ -1,0 +1,41 @@
+<div class="login-box-container">
+
+	<div class="col-md-12 no-padding" id="loginContainer">
+		<div class="col-md-12 no-padding login-logo-container">
+			<img src="../../images/logo.png" class="img-responsive login-logo">
+		</div>
+		<form class="login-form" name="loginForm" novalidate="novalidate">
+			<div class="form-item" data-ng-class="{'has-error':(loginForm.username.$error.required || loginForm.username.$error.email) && vm.onClickValidation}">
+				<h5>{{"LOGIN.EMAIL" | translate}}</h5>
+				<input type="email" class="form-control" placeholder="Email Address" name="username" data-ng-model="vm.username" required="required" autofocus>
+			</div>
+			<div class="form-item no-margin-bottom" data-ng-class="{'has-error':loginForm.password.$error.required && vm.onClickValidation}">
+				<h5>{{"LOGIN.PASSWORD" | translate}}</h5>
+				<input type="password" class="form-control" placeholder="Password" name="password" data-ng-model="vm.password" required="required">
+			</div>
+			<p class="semibold-text margin-top-10 pull-right"><a data-ng-click="vm.loadForgotPage()">{{"LOGIN.FORGOT_PASSWORD" | translate}} ?</a></p>
+			<div class="clearfix"></div>
+			<div class="login-form-footer">
+				<button class="btn btn-info site-button" data-ng-click="vm.signIn(loginForm.$valid,loginForm)">{{"LOGIN.SIGN_IN" | translate}}</button>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-12 no-padding" id="forgotContainer">
+		<h3 class="no-margin-top">{{"LOGIN.RECOVER_PASSWORD" | translate}}</h3>
+		<div class="clearfix"></div>
+		<p class="forgot-text">Enter your Email and instructions will be sent to you!</p>
+		<form class="forget-form" name="resetPasswordForm" novalidate="novalidate">
+			<div class="clearfix"></div>
+			<div class="login-form-body">
+				<div class=" form-item <margin-bottom-10></margin-bottom-10>" data-ng-class="{'has-error':(resetPasswordForm.remail.$error.required || resetPasswordForm.remail.$error.email) && vm.onClickValidation}">
+					<input type="email" class="form-control" placeholder="Email Address" name="remail" data-ng-model="vm.recoverEmail" required="required" autofocus>
+				</div>
+				<p class="semibold-text margin-top-20 pull-right"><a data-ng-click="vm.loadLoginPage();">{{"LOGIN.BACK_TO_LOGIN" | translate}}</a></p>
+			</div>
+			<div class="clearfix "></div>
+			<div class="login-form-footer ">
+				<button class="btn btn-primary site-button" data-ng-click="vm.resetPassword(resetPasswordForm.$valid,resetPasswordForm)">{{"LOGIN.RESET" | translate}}</button>
+			</div>
+		</form>
+	</div>
+</div>

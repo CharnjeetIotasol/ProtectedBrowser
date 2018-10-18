@@ -1,0 +1,53 @@
+<div class="page-title">
+    <div>
+        <h1>Directory</h1>
+        <ul class="breadcrumb side">
+            <li><a data-ui-sref="/" style="color:#676a6d"><i class="lnr lnr-home lnr-md"></i></a></li>
+            <li class="active"><a data-ui-sref="directory">Directory</a></li>
+        </ul>
+    </div>
+</div>
+<div class="col-md-12 no-padding">
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-12 no-padding">
+	                		<div class="form-item" data-ng-class="{'has-error':recordForm.IsActive.$error.required && vm.onClickValidation}">
+							  	<div class="toggle lg">
+	                            <h4>
+	                                IsActive
+	                                <input type="checkbox" data-ng-model="vm.record.isActive"><span class="button-indecator"></span>
+	                            </h4>
+								<div class="error-message" data-ng-if="recordForm.IsActive.$error.required && vm.onClickValidation">IsActive is required</div>
+			                </div>
+							<div class="clearfix"></div>
+	                		<div class="form-item" >
+			                	<h4>RootPath</h4>
+									<textarea class="form-control" rows="10" name="RootPath"  data-ng-model="vm.record.rootPath"></textarea>
+								<div class="error-message" data-ng-if="recordForm.RootPath.$error.required && vm.onClickValidation">RootPath is required</div>
+			                </div>
+							<div class="clearfix"></div>
+	                		<div class="form-item" >
+			                	<h4>UserName</h4>
+									<input class="form-control" type="text" name="UserName"  data-ng-model="vm.record.userName"> 
+								<div class="error-message" data-ng-if="recordForm.UserName.$error.required && vm.onClickValidation">UserName is required</div>
+			                </div>
+							<div class="clearfix"></div>
+	                		<div class="form-item" >
+			                	<h4>Password</h4>
+									<input class="form-control" type="text" name="Password"  data-ng-model="vm.record.password"> 
+								<div class="error-message" data-ng-if="recordForm.Password.$error.required && vm.onClickValidation">Password is required</div>
+			                </div>
+							<div class="clearfix"></div>
+	                		<div class="form-item" >
+			                	<h4>Name</h4>
+									<input class="form-control" type="text" name="Name"  data-ng-model="vm.record.name"> 
+								<div class="error-message" data-ng-if="recordForm.Name.$error.required && vm.onClickValidation">Name is required</div>
+			                </div>
+							<div class="clearfix"></div>
+            <div class="mt-20 text-right">
+                <button class="btn btn-primary icon-btn" type="button" data-ng-click="vm.save(recordForm.$valid)">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+

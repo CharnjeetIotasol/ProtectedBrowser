@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="applicationApp">
+
+<head>
+   <title>ProtectedBrowser</title>
+   	<meta name="description" content="">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<base href="/">
+	<link rel="stylesheet" href="~/wwwroot/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/wwwroot/js/sweetalert/sweetalert.css">
+	<link rel="stylesheet" href="~/wwwroot/css/datepicker.css">
+	<link rel="stylesheet" href="~/wwwroot/css/select-2.css">
+	<link rel="stylesheet" href="~/wwwroot/css/style.css">
+</head>
+
+<body>
+	@RenderBody()
+
+    <!-- Common Files -->
+	<script type="text/javascript" src="~/wwwroot/js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="~/wwwroot/js/plugins/moment.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/sweetalert.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/bootstrap-notify.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/chart.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/dataTables.bootstrap.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/fullcalendar.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/jquery-ui.custom.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/select2.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/pace.min.js"></script>
+
+	<script type="text/javascript" src="~/wwwroot/js/angular/angular.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/angular/angular-resource.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/angular-ui-router.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/dirPagination.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/angular-local-storage/dist/angular-local-storage.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/angular-file-upload.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/angular-translate.min.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/plugins/angular-translate-loader-static-files.js"></script>
+
+	<script type="text/javascript" src="~/wwwroot/js/main.js"></script>
+
+	<!-- Application Base Files -->
+	<script type="text/javascript" src="~/wwwroot/app.js"></script>
+	<script type="text/javascript" src="~/wwwroot/js/common.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/common/commonService.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/common/commonUtils.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/interceptor/auth.interceptor.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/signIn/oAuthValidateService.js"></script>
+	
+	<script type="text/javascript" src="~/wwwroot/angular/signIn/signInController.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/account/accountSettingsController.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/account/changePasswordController.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/account/recoverPasswordController.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/header/headerController.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/pages/Contact/ContactUsListController.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/pages/Blog/BlogCategoryListControlle.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/pages/Blog/BlogListController.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/pages/Blog/BlogEditController.js"></script>
+    <!--Controllers-->
+    	<script type="text/javascript" src="~/wwwroot/angular/pages/Directory/DirectoryListController.js"></script>
+		<script type="text/javascript" src="~/wwwroot/angular/pages/Directory/DirectoryEditController.js"></script>
+		<script type="text/javascript" src="~/wwwroot/angular/pages/Directory/DirectoryDetailController.js"></script>
+	<!--@@NEW_CONTROLLER_FILE_HERE@@  -->
+	
+	<script type="text/javascript" src="~/wwwroot/angular/signIn/signInRepository.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/account/accountRepository.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/pages/Contact/ContactUsRepository.js"></script>
+	<script type="text/javascript" src="~/wwwroot/angular/pages/Blog/BlogRepository.js"></script>
+    <!--Repositories-->
+		<script type="text/javascript" src="~/wwwroot/angular/pages/Directory/DirectoryRepository.js"></script>
+    <!--@@NEW_REPOSITORY_FILE_HERE@@  -->
+</body>
+</html>

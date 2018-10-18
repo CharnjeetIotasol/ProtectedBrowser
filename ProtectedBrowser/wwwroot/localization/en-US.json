@@ -1,0 +1,48 @@
+ {
+ 	"LOGIN":{
+    		"EMAIL": "Email",
+    		"PASSWORD": "Password",	
+    		"FORGOT_PASSWORD": "Forgot password",
+    		"SIGN_IN": "Log In",
+    		"BACK_TO_LOGIN": "Back to login",
+    		"RESET": "Reset",
+    		"RECOVER_PASSWORD":"Recover Password"
+    },
+    "EDIT":{
+    	"BASIC_INFO":"Basic Info",
+    	"ACTIVE":"Active",
+    	"ADD_NEW_RECORD":"Add New Record"
+    },
+    "DASHBOARD":{
+    	"ACCOUNT_SETTINGS":"Account Settings",
+    	"CHANGE_PASSWORD":"Change Password",
+    	"LOGOUT":"Logout",
+    	"CONTACT":"Contact"
+    },
+    "COMMON":{
+    	"ADD":"Add",
+    	"EDIT":"Edit",
+    	"DELETE":"Delete",
+    	"HOME":"Home",
+    	"CANCEL":"Cancel",
+    	"SAVE":"Save",
+    	"SELECT":"Select",
+    	"REPORT":"Report"
+    },
+ 			"Directory":{
+				"id":"Id" ,
+				"createdBy":"CreatedBy" ,
+				"updatedBy":"UpdatedBy" ,
+				"createdOn":"CreatedOn" ,
+				"updatedOn":"UpdatedOn" ,
+				"isDeleted":"IsDeleted" ,
+				"isActive":"IsActive" ,
+				"rootPath":"RootPath" ,
+				"userName":"UserName" ,
+				"password":"Password" ,
+				"name":"Name" 
+		 } 
+	
+}
+
+

@@ -1,0 +1,41 @@
+<div class="breadcrumb-container">
+	<ol class="breadcrumb">
+		<li><a href="#">Home</a></li>
+		<li class="active">Account Settings</li>
+	</ol>
+</div>
+<div class="col-md-12 no-padding edit-page-form">
+	<section class="login-content">
+		<div class="card user-settings">
+			<form name="accountSettingForm" novalidate="novalidate" class="form-item">
+				<div class="row mb-20">
+					<div class="col-md-6 form-group" data-ng-class="{'has-error':accountSettingForm.firstName.$error.required && vm.onClickValidation}">
+						<h5 class="ng-binding">{{"FIRST NAME" | translate}}</h5>
+						<input class="form-control" type="text" name="firstName" data-ng-model="vm.userDetail.firstName" required>
+					</div>
+					<div class="col-md-6 form-group" data-ng-class="{'has-error':accountSettingForm.lastName.$error.required && vm.onClickValidation}">
+						<h5 class="ng-binding">{{"LAST NAME" | translate}}</h5>
+						<input class="form-control" type="text" name="lastName" data-ng-model="vm.userDetail.lastName" required>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 mb-20 form-group" data-ng-class="{'has-error':accountSettingForm.userName.$error.required && vm.onClickValidation}">
+						<h5 class="ng-binding">{{"EMAIL" | translate}}</h5>
+						<input class="form-control" type="text" name="userName" data-ng-model="vm.userDetail.userName" readonly>
+						<div class="error-message" data-ng-if="accountSettingForm.username.$invalid">
+							<div data-ng-if="accountSettingForm.username.$error.email">{{"INVALID EMAIL" | translate}}</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-md-12 mb-20 form-group" data-ng-class="{'has-error':accountSettingForm.phoneNumber.$error.required && vm.onClickValidation}">
+						<h5 class="ng-binding">{{"MOBILE NO" | translate}}</h5>
+						<input class="form-control" type="text" name="phoneNumber" data-ng-model="vm.userDetail.phoneNumber" required>
+					</div>
+				</div>
+				<div class="pull-right">
+					<button class="btn btn-primary site-button" data-ng-click="vm.updateUserDetail(accountSettingForm.$valid)">{{"SAVE" | translate}}</button>
+				</div>
+			</form>
+		</div>
+	</section>
+</div>

@@ -1,0 +1,964 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProtectedBrowserModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="AppointmentInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="AppointmentDate" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="Note" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StartTime" Type="time" Mode="In" />
+          <Parameter Name="EndTime" Type="time" Mode="In" />
+          <Parameter Name="ToUserId" Type="bigint" Mode="In" />
+          <Parameter Name="FromUserId" Type="bigint" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AppointmentSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="ToUserId" Type="bigint" Mode="In" />
+          <Parameter Name="FromUserId" Type="bigint" Mode="In" />
+          <Parameter Name="AppointmentDate" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="StartDate" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="EndDate" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="next" Type="int" Mode="In" />
+          <Parameter Name="offset" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AppointmentUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="AppointmentDate" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="Note" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ToUserId" Type="bigint" Mode="In" />
+          <Parameter Name="FromUserId" Type="bigint" Mode="In" />
+          <Parameter Name="IsCancel" Type="bit" Mode="In" />
+          <Parameter Name="CancellationReason" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="StartTime" Type="time" Mode="In" />
+          <Parameter Name="EndTime" Type="time" Mode="In" />
+          <Parameter Name="isAppointmentDone" Type="bit" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="BlogInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CategoryId" Type="bigint" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="FileId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="BlogSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="CategoryId" Type="bigint" Mode="In" />
+          <Parameter Name="next" Type="int" Mode="In" />
+          <Parameter Name="offset" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BlogUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="Title" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="CategoryId" Type="bigint" Mode="In" />
+          <Parameter Name="IsDeleted" Type="bit" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="FileId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="CategoryInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CategoryName" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="CategorySelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CategoryId" Type="bigint" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="next" Type="int" Mode="In" />
+          <Parameter Name="offset" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CategoryUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CategoryId" Type="bigint" Mode="In" />
+          <Parameter Name="CategoryName" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="IsDeleted" Type="bit" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ContactUsDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="ContactUsInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="PhoneNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="EmailAddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="Message" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="ContactUsSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="next" Type="int" Mode="In" />
+          <Parameter Name="offset" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DailyWorkSettingAction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Sun" Type="bit" Mode="In" />
+          <Parameter Name="Mon" Type="bit" Mode="In" />
+          <Parameter Name="Tue" Type="bit" Mode="In" />
+          <Parameter Name="Wed" Type="bit" Mode="In" />
+          <Parameter Name="Thu" Type="bit" Mode="In" />
+          <Parameter Name="Fri" Type="bit" Mode="In" />
+          <Parameter Name="Sat" Type="bit" Mode="In" />
+          <Parameter Name="StartTime" Type="time" Mode="In" />
+          <Parameter Name="EndTime" Type="time" Mode="In" />
+          <Parameter Name="StartLunchTime" Type="time" Mode="In" />
+          <Parameter Name="EndLunchTime" Type="time" Mode="In" />
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DailyWorkSettingSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DirectoryInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="RootPath" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="DirectorySelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="next" Type="int" Mode="In" />
+          <Parameter Name="offset" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DirectoryUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="IsDeleted" Type="bit" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="RootPath" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="DirectoryXMLSave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DirectoryXml" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="DummyTableForFileSave" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="DummyTableForFileSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="Type" Type="nvarchar" Mode="In" />
+          <Parameter Name="next" Type="int" Mode="In" />
+          <Parameter Name="offset" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DummyTableForFileUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="IsDeleted" Type="bit" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="EmailConfigurationSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConfigurationKey" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="FileGroupInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Type" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="FileGroupItemInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="FileName" Type="nvarchar" Mode="In" />
+          <Parameter Name="MimeType" Type="nvarchar" Mode="In" />
+          <Parameter Name="Thumbnail" Type="nvarchar" Mode="In" />
+          <Parameter Name="Size" Type="bigint" Mode="In" />
+          <Parameter Name="Path" Type="nvarchar" Mode="In" />
+          <Parameter Name="OriginalName" Type="nvarchar" Mode="In" />
+          <Parameter Name="OnServer" Type="nvarchar" Mode="In" />
+          <Parameter Name="TypeId" Type="bigint" Mode="In" />
+          <Parameter Name="Type" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="FileGroupItemsDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="FileGroupItemsInsertXml" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="TypeId" Type="bigint" Mode="In" />
+          <Parameter Name="FileGroupItemsXml" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="InsertExceptionLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Source" Type="nvarchar" Mode="In" />
+          <Parameter Name="Message" Type="nvarchar" Mode="In" />
+          <Parameter Name="StackTrace" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Uri" Type="nvarchar" Mode="In" />
+          <Parameter Name="method" Type="nvarchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="LeaveInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="StartDate" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="EndDate" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="StartTime" Type="time" Mode="In" />
+          <Parameter Name="EndTime" Type="time" Mode="In" />
+          <Parameter Name="Type" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="LeaveSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="userId" Type="bigint" Mode="In" />
+          <Parameter Name="AppointmentDate" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="next" Type="int" Mode="In" />
+          <Parameter Name="offset" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LeaveUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="UpdatedOn" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="IsDeleted" Type="bit" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="StartDate" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="EndDate" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="StartTime" Type="time" Mode="In" />
+          <Parameter Name="EndTime" Type="time" Mode="In" />
+          <Parameter Name="Type" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="PublicHolidaysInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartHoliday" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="EndHoliday" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="PublicHolidaysSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="TodayDate" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="StartDate" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="EndDate" Type="datetimeoffset" Mode="In" />
+        </Function>
+        <Function Name="PublicHolidaysUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartHoliday" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="EndHoliday" Type="datetimeoffset" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar" Mode="In" />
+          <Parameter Name="UpdatedBy" Type="bigint" Mode="In" />
+          <Parameter Name="IsDeleted" Type="bit" Mode="In" />
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="SelectUserProfileByUniqueCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UniqueCode" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateUserProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="PhoneNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsActive" Type="bit" Mode="In" />
+          <Parameter Name="ProfileImageUrl" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="UploadedFileInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FileName" Type="nvarchar" Mode="In" />
+          <Parameter Name="FileUrl" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <EntityContainer Name="ProtectedBrowserModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProtectedBrowserModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ProtectedBrowserEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="AppointmentInsert" ReturnType="Collection(Decimal)">
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="AppointmentDate" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="Note" Mode="In" Type="String" />
+            <Parameter Name="StartTime" Mode="In" Type="Time" />
+            <Parameter Name="EndTime" Mode="In" Type="Time" />
+            <Parameter Name="ToUserId" Mode="In" Type="Int64" />
+            <Parameter Name="FromUserId" Mode="In" Type="Int64" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AppointmentSelect" ReturnType="Collection(ProtectedBrowserModel.AppointmentSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="ToUserId" Mode="In" Type="Int64" />
+            <Parameter Name="FromUserId" Mode="In" Type="Int64" />
+            <Parameter Name="AppointmentDate" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="next" Mode="In" Type="Int32" />
+            <Parameter Name="offset" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AppointmentUpdate">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="AppointmentDate" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="Note" Mode="In" Type="String" />
+            <Parameter Name="ToUserId" Mode="In" Type="Int64" />
+            <Parameter Name="FromUserId" Mode="In" Type="Int64" />
+            <Parameter Name="IsCancel" Mode="In" Type="Boolean" />
+            <Parameter Name="CancellationReason" Mode="In" Type="String" />
+            <Parameter Name="StartTime" Mode="In" Type="Time" />
+            <Parameter Name="EndTime" Mode="In" Type="Time" />
+            <Parameter Name="isAppointmentDone" Mode="In" Type="Boolean" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BlogInsert" ReturnType="Collection(Decimal)">
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="CategoryId" Mode="In" Type="Int64" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="FileId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="BlogSelect" ReturnType="Collection(ProtectedBrowserModel.BlogSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="CategoryId" Mode="In" Type="Int64" />
+            <Parameter Name="next" Mode="In" Type="Int32" />
+            <Parameter Name="offset" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BlogUpdate">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="CategoryId" Mode="In" Type="Int64" />
+            <Parameter Name="IsDeleted" Mode="In" Type="Boolean" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="FileId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="CategoryInsert" ReturnType="Collection(Decimal)">
+            <Parameter Name="CategoryName" Mode="In" Type="String" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="CategorySelect" ReturnType="Collection(ProtectedBrowserModel.CategorySelect_Result)">
+            <Parameter Name="CategoryId" Mode="In" Type="Int64" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="next" Mode="In" Type="Int32" />
+            <Parameter Name="offset" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CategoryUpdate">
+            <Parameter Name="CategoryId" Mode="In" Type="Int64" />
+            <Parameter Name="CategoryName" Mode="In" Type="String" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="IsDeleted" Mode="In" Type="Boolean" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ContactUsDelete">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="ContactUsInsert">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="EmailAddress" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ContactUsSelect" ReturnType="Collection(ProtectedBrowserModel.ContactUsSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="next" Mode="In" Type="Int32" />
+            <Parameter Name="offset" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DailyWorkSettingAction" ReturnType="Collection(Int64)">
+            <Parameter Name="Sun" Mode="In" Type="Boolean" />
+            <Parameter Name="Mon" Mode="In" Type="Boolean" />
+            <Parameter Name="Tue" Mode="In" Type="Boolean" />
+            <Parameter Name="Wed" Mode="In" Type="Boolean" />
+            <Parameter Name="Thu" Mode="In" Type="Boolean" />
+            <Parameter Name="Fri" Mode="In" Type="Boolean" />
+            <Parameter Name="Sat" Mode="In" Type="Boolean" />
+            <Parameter Name="StartTime" Mode="In" Type="Time" />
+            <Parameter Name="EndTime" Mode="In" Type="Time" />
+            <Parameter Name="StartLunchTime" Mode="In" Type="Time" />
+            <Parameter Name="EndLunchTime" Mode="In" Type="Time" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DailyWorkSettingSelect" ReturnType="Collection(ProtectedBrowserModel.DailyWorkSettingSelect_Result)" />
+          <FunctionImport Name="DirectoryInsert" ReturnType="Collection(Decimal)">
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="RootPath" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DirectorySelect" ReturnType="Collection(ProtectedBrowserModel.DirectorySelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="next" Mode="In" Type="Int32" />
+            <Parameter Name="offset" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DirectoryUpdate">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="IsDeleted" Mode="In" Type="Boolean" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="RootPath" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DirectoryXMLSave">
+            <Parameter Name="DirectoryXml" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DummyTableForFileSave" ReturnType="Collection(Decimal)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="DummyTableForFileSelect" ReturnType="Collection(ProtectedBrowserModel.DummyTableForFileSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+            <Parameter Name="next" Mode="In" Type="Int32" />
+            <Parameter Name="offset" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DummyTableForFileUpdate">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="IsDeleted" Mode="In" Type="Boolean" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="EmailConfigurationSelect" ReturnType="Collection(ProtectedBrowserModel.EmailConfigurationSelect_Result)">
+            <Parameter Name="ConfigurationKey" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FileGroupInsert" ReturnType="Collection(Decimal)">
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FileGroupItemInsert" ReturnType="Collection(Decimal)">
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="FileName" Mode="In" Type="String" />
+            <Parameter Name="MimeType" Mode="In" Type="String" />
+            <Parameter Name="Thumbnail" Mode="In" Type="String" />
+            <Parameter Name="Size" Mode="In" Type="Int64" />
+            <Parameter Name="Path" Mode="In" Type="String" />
+            <Parameter Name="OriginalName" Mode="In" Type="String" />
+            <Parameter Name="OnServer" Mode="In" Type="String" />
+            <Parameter Name="TypeId" Mode="In" Type="Int64" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FileGroupItemsDelete">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="FileGroupItemsInsertXml">
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="TypeId" Mode="In" Type="Int64" />
+            <Parameter Name="FileGroupItemsXml" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertExceptionLog" ReturnType="Collection(Decimal)">
+            <Parameter Name="Source" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="StackTrace" Mode="In" Type="String" />
+            <Parameter Name="Uri" Mode="In" Type="String" />
+            <Parameter Name="method" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="LeaveInsert" ReturnType="Collection(Decimal)">
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="StartTime" Mode="In" Type="Time" />
+            <Parameter Name="EndTime" Mode="In" Type="Time" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="LeaveSelect" ReturnType="Collection(ProtectedBrowserModel.LeaveSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="userId" Mode="In" Type="Int64" />
+            <Parameter Name="AppointmentDate" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="next" Mode="In" Type="Int32" />
+            <Parameter Name="offset" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LeaveUpdate">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="UpdatedOn" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="IsDeleted" Mode="In" Type="Boolean" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="StartTime" Mode="In" Type="Time" />
+            <Parameter Name="EndTime" Mode="In" Type="Time" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="PublicHolidaysInsert" ReturnType="Collection(Decimal)">
+            <Parameter Name="StartHoliday" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="EndHoliday" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="PublicHolidaysSelect" ReturnType="Collection(ProtectedBrowserModel.PublicHolidaysSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="TodayDate" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTimeOffset" />
+          </FunctionImport>
+          <FunctionImport Name="PublicHolidaysUpdate">
+            <Parameter Name="StartHoliday" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="EndHoliday" Mode="In" Type="DateTimeOffset" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="UpdatedBy" Mode="In" Type="Int64" />
+            <Parameter Name="IsDeleted" Mode="In" Type="Boolean" />
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="SelectUserProfileByUniqueCode" ReturnType="Collection(ProtectedBrowserModel.SelectUserProfileByUniqueCode_Result)">
+            <Parameter Name="UniqueCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateUserProfile">
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="IsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="ProfileImageUrl" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UploadedFileInsert" ReturnType="Collection(Decimal)">
+            <Parameter Name="FileName" Mode="In" Type="String" />
+            <Parameter Name="FileUrl" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="AppointmentSelect_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int64" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTimeOffset" Name="CreatedOn" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="UpdatedOn" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="AppointmentDate" Nullable="true" />
+          <Property Type="String" Name="Note" Nullable="true" MaxLength="256" />
+          <Property Type="Int64" Name="ToUserId" Nullable="true" />
+          <Property Type="Int64" Name="FromUserId" Nullable="true" />
+          <Property Type="Boolean" Name="IsCancel" Nullable="false" />
+          <Property Type="String" Name="CancellationReason" Nullable="true" />
+          <Property Type="Time" Name="StartTime" Nullable="true" />
+          <Property Type="Time" Name="EndTime" Nullable="true" />
+          <Property Type="Boolean" Name="isAppointmentDone" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="overall_count" Nullable="true" />
+          <Property Type="String" Name="FromUserFirstName" Nullable="true" />
+          <Property Type="String" Name="FromUserLastName" Nullable="true" />
+          <Property Type="String" Name="FromUserEmail" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="FromUserPhoneNumber" Nullable="true" />
+          <Property Type="String" Name="ToUserFirstName" Nullable="true" />
+          <Property Type="String" Name="ToUserLastName" Nullable="true" />
+          <Property Type="String" Name="ToUserEmail" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="ToUserPhoneNumber" Nullable="true" />
+          <Property Type="String" Name="UpdatedByFirstName" Nullable="true" />
+          <Property Type="String" Name="UpdatedByLastName" Nullable="true" />
+          <Property Type="String" Name="UpdatedByPhoneNumber" Nullable="true" />
+          <Property Type="String" Name="CreatedByFirstName" Nullable="true" />
+          <Property Type="String" Name="CreatedByLastName" Nullable="true" />
+          <Property Type="String" Name="CreatedByPhoneNumber" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="BlogSelect_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="Int64" Name="CategoryId" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="CreatedOn" Nullable="true" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="true" />
+          <Property Type="DateTimeOffset" Name="UpdatedOn" Nullable="true" />
+          <Property Type="Int64" Name="UpdatedBy" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="overall_count" Nullable="true" />
+          <Property Type="Int64" Name="FileId" Nullable="true" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="FileUrl" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CategorySelect_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="CreatedOn" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="UpdatedOn" Nullable="false" />
+          <Property Type="Int64" Name="UpdatedBy" Nullable="true" />
+          <Property Type="Int32" Name="overall_count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ContactUsSelect_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="EmailAddress" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" MaxLength="25" />
+          <Property Type="DateTimeOffset" Name="CreatedOn" Nullable="true" />
+          <Property Type="String" Name="Message" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DailyWorkSettingSelect_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Boolean" Name="Sunday" Nullable="false" />
+          <Property Type="Boolean" Name="Monday" Nullable="false" />
+          <Property Type="Boolean" Name="Tuesday" Nullable="false" />
+          <Property Type="Boolean" Name="Wednesday" Nullable="false" />
+          <Property Type="Boolean" Name="Thursday" Nullable="false" />
+          <Property Type="Boolean" Name="Friday" Nullable="false" />
+          <Property Type="Boolean" Name="Satureday" Nullable="false" />
+          <Property Type="Time" Name="StartTime" Nullable="true" />
+          <Property Type="Time" Name="EndTime" Nullable="true" />
+          <Property Type="Time" Name="StartLunchTime" Nullable="true" />
+          <Property Type="Time" Name="EndLunchTime" Nullable="true" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int64" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTimeOffset" Name="UpdatedDate" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DirectorySelect_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="false" />
+          <Property Type="Int64" Name="UpdatedBy" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="CreatedOn" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="UpdatedOn" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="RootPath" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="overall_count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="DummyTableForFileSelect_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int64" Name="UpdatedBy" Nullable="true" />
+          <Property Type="String" Name="FileGroupItemsXml" Nullable="true" />
+          <Property Type="String" Name="UpdatedByFirstName" Nullable="true" />
+          <Property Type="String" Name="UpdatedByLastName" Nullable="true" />
+          <Property Type="String" Name="UpdatedByPhoneNumber" Nullable="true" />
+          <Property Type="String" Name="CreatedByFirstName" Nullable="true" />
+          <Property Type="String" Name="CreatedByLastName" Nullable="true" />
+          <Property Type="String" Name="CreatedByPhoneNumber" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="EmailConfigurationSelect_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="ConfigurationKey" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="ConfigurationValue" Nullable="true" />
+          <Property Type="String" Name="EmailSubject" Nullable="true" MaxLength="1000" />
+          <Property Type="DateTimeOffset" Name="CreatedDate" Nullable="false" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int32" Name="IsDeleted" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="LeaveSelect_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="false" />
+          <Property Type="Int64" Name="UpdatedBy" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="CreatedOn" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="UpdatedOn" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="StartDate" Nullable="true" />
+          <Property Type="DateTimeOffset" Name="EndDate" Nullable="true" />
+          <Property Type="Time" Name="StartTime" Nullable="true" />
+          <Property Type="Time" Name="EndTime" Nullable="true" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="Int64" Name="UserId" Nullable="true" />
+          <Property Type="String" Name="FirstName" Nullable="true" />
+          <Property Type="String" Name="LastName" Nullable="true" />
+          <Property Type="String" Name="FullName" Nullable="true" />
+          <Property Type="Int32" Name="overall_count" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="PublicHolidaysSelect_Result">
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="StartHoliday" Nullable="true" />
+          <Property Type="DateTimeOffset" Name="EndHoliday" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="Boolean" Name="IsDeleted" Nullable="false" />
+          <Property Type="Int64" Name="CreatedBy" Nullable="true" />
+          <Property Type="Int64" Name="UpdatedBy" Nullable="true" />
+          <Property Type="DateTimeOffset" Name="CreatedDate" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="UpdatedDate" Nullable="false" />
+          <Property Type="Boolean" Name="IsOnlyView" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SelectUserProfileByUniqueCode_Result">
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+          <Property Type="Int64" Name="Id" Nullable="false" />
+          <Property Type="Boolean" Name="IsActive" Nullable="false" />
+          <Property Type="String" Name="PhoneNumber" Nullable="true" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+          <Property Type="String" Name="firstName" Nullable="true" />
+          <Property Type="String" Name="lastName" Nullable="true" />
+          <Property Type="String" Name="ProfilePic" Nullable="true" />
+          <Property Type="String" Name="UniqueCode" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProtectedBrowserModelStoreContainer" CdmEntityContainer="ProtectedBrowserEntities" >
+          <FunctionImportMapping FunctionImportName="AppointmentInsert" FunctionName="ProtectedBrowserModel.Store.AppointmentInsert" />
+          <FunctionImportMapping FunctionImportName="AppointmentSelect" FunctionName="ProtectedBrowserModel.Store.AppointmentSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProtectedBrowserModel.AppointmentSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="ToUserId" ColumnName="ToUserId" />
+                <ScalarProperty Name="FromUserId" ColumnName="FromUserId" />
+                <ScalarProperty Name="IsCancel" ColumnName="IsCancel" />
+                <ScalarProperty Name="CancellationReason" ColumnName="CancellationReason" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="isAppointmentDone" ColumnName="isAppointmentDone" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="overall_count" ColumnName="overall_count" />
+                <ScalarProperty Name="FromUserFirstName" ColumnName="FromUserFirstName" />
+                <ScalarProperty Name="FromUserLastName" ColumnName="FromUserLastName" />
+                <ScalarProperty Name="FromUserEmail" ColumnName="FromUserEmail" />
+                <ScalarProperty Name="FromUserPhoneNumber" ColumnName="FromUserPhoneNumber" />
+                <ScalarProperty Name="ToUserFirstName" ColumnName="ToUserFirstName" />
+                <ScalarProperty Name="ToUserLastName" ColumnName="ToUserLastName" />
+                <ScalarProperty Name="ToUserEmail" ColumnName="ToUserEmail" />
+                <ScalarProperty Name="ToUserPhoneNumber" ColumnName="ToUserPhoneNumber" />
+                <ScalarProperty Name="UpdatedByFirstName" ColumnName="UpdatedByFirstName" />
+                <ScalarProperty Name="UpdatedByLastName" ColumnName="UpdatedByLastName" />
+                <ScalarProperty Name="UpdatedByPhoneNumber" ColumnName="UpdatedByPhoneNumber" />
+                <ScalarProperty Name="CreatedByFirstName" ColumnName="CreatedByFirstName" />
+                <ScalarProperty Name="CreatedByLastName" ColumnName="CreatedByLastName" />
+                <ScalarProperty Name="CreatedByPhoneNumber" ColumnName="CreatedByPhoneNumber" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AppointmentUpdate" FunctionName="ProtectedBrowserModel.Store.AppointmentUpdate" />
+          <FunctionImportMapping FunctionImportName="BlogInsert" FunctionName="ProtectedBrowserModel.Store.BlogInsert" />
+          <FunctionImportMapping FunctionImportName="BlogSelect" FunctionName="ProtectedBrowserModel.Store.BlogSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProtectedBrowserModel.BlogSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="overall_count" ColumnName="overall_count" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileUrl" ColumnName="FileUrl" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BlogUpdate" FunctionName="ProtectedBrowserModel.Store.BlogUpdate" />
+          <FunctionImportMapping FunctionImportName="CategoryInsert" FunctionName="ProtectedBrowserModel.Store.CategoryInsert" />
+          <FunctionImportMapping FunctionImportName="CategorySelect" FunctionName="ProtectedBrowserModel.Store.CategorySelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProtectedBrowserModel.CategorySelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="overall_count" ColumnName="overall_count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CategoryUpdate" FunctionName="ProtectedBrowserModel.Store.CategoryUpdate" />
+          <FunctionImportMapping FunctionImportName="ContactUsDelete" FunctionName="ProtectedBrowserModel.Store.ContactUsDelete" />
+          <FunctionImportMapping FunctionImportName="ContactUsInsert" FunctionName="ProtectedBrowserModel.Store.ContactUsInsert" />
+          <FunctionImportMapping FunctionImportName="ContactUsSelect" FunctionName="ProtectedBrowserModel.Store.ContactUsSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProtectedBrowserModel.ContactUsSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DailyWorkSettingAction" FunctionName="ProtectedBrowserModel.Store.DailyWorkSettingAction" />
+          <FunctionImportMapping FunctionImportName="DailyWorkSettingSelect" FunctionName="ProtectedBrowserModel.Store.DailyWorkSettingSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProtectedBrowserModel.DailyWorkSettingSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sunday" ColumnName="Sunday" />
+                <ScalarProperty Name="Monday" ColumnName="Monday" />
+                <ScalarProperty Name="Tuesday" ColumnName="Tuesday" />
+                <ScalarProperty Name="Wednesday" ColumnName="Wednesday" />
+                <ScalarProperty Name="Thursday" ColumnName="Thursday" />
+                <ScalarProperty Name="Friday" ColumnName="Friday" />
+                <ScalarProperty Name="Satureday" ColumnName="Satureday" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartLunchTime" ColumnName="StartLunchTime" />
+                <ScalarProperty Name="EndLunchTime" ColumnName="EndLunchTime" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DirectoryInsert" FunctionName="ProtectedBrowserModel.Store.DirectoryInsert" />
+          <FunctionImportMapping FunctionImportName="DirectorySelect" FunctionName="ProtectedBrowserModel.Store.DirectorySelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProtectedBrowserModel.DirectorySelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="RootPath" ColumnName="RootPath" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="overall_count" ColumnName="overall_count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DirectoryUpdate" FunctionName="ProtectedBrowserModel.Store.DirectoryUpdate" />
+          <FunctionImportMapping FunctionImportName="DirectoryXMLSave" FunctionName="ProtectedBrowserModel.Store.DirectoryXMLSave" />
+          <FunctionImportMapping FunctionImportName="DummyTableForFileSave" FunctionName="ProtectedBrowserModel.Store.DummyTableForFileSave" />
+          <FunctionImportMapping FunctionImportName="DummyTableForFileSelect" FunctionName="ProtectedBrowserModel.Store.DummyTableForFileSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProtectedBrowserModel.DummyTableForFileSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="FileGroupItemsXml" ColumnName="FileGroupItemsXml" />
+                <ScalarProperty Name="UpdatedByFirstName" ColumnName="UpdatedByFirstName" />
+                <ScalarProperty Name="UpdatedByLastName" ColumnName="UpdatedByLastName" />
+                <ScalarProperty Name="UpdatedByPhoneNumber" ColumnName="UpdatedByPhoneNumber" />
+                <ScalarProperty Name="CreatedByFirstName" ColumnName="CreatedByFirstName" />
+                <ScalarProperty Name="CreatedByLastName" ColumnName="CreatedByLastName" />
+                <ScalarProperty Name="CreatedByPhoneNumber" ColumnName="CreatedByPhoneNumber" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DummyTableForFileUpdate" FunctionName="ProtectedBrowserModel.Store.DummyTableForFileUpdate" />
+          <FunctionImportMapping FunctionImportName="EmailConfigurationSelect" FunctionName="ProtectedBrowserModel.Store.EmailConfigurationSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProtectedBrowserModel.EmailConfigurationSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigurationKey" ColumnName="ConfigurationKey" />
+                <ScalarProperty Name="ConfigurationValue" ColumnName="ConfigurationValue" />
+                <ScalarProperty Name="EmailSubject" ColumnName="EmailSubject" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FileGroupInsert" FunctionName="ProtectedBrowserModel.Store.FileGroupInsert" />
+          <FunctionImportMapping FunctionImportName="FileGroupItemInsert" FunctionName="ProtectedBrowserModel.Store.FileGroupItemInsert" />
+          <FunctionImportMapping FunctionImportName="FileGroupItemsDelete" FunctionName="ProtectedBrowserModel.Store.FileGroupItemsDelete" />
+          <FunctionImportMapping FunctionImportName="FileGroupItemsInsertXml" FunctionName="ProtectedBrowserModel.Store.FileGroupItemsInsertXml" />
+          <FunctionImportMapping FunctionImportName="InsertExceptionLog" FunctionName="ProtectedBrowserModel.Store.InsertExceptionLog" />
+          <FunctionImportMapping FunctionImportName="LeaveInsert" FunctionName="ProtectedBrowserModel.Store.LeaveInsert" />
+          <FunctionImportMapping FunctionImportName="LeaveSelect" FunctionName="ProtectedBrowserModel.Store.LeaveSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProtectedBrowserModel.LeaveSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="overall_count" ColumnName="overall_count" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LeaveUpdate" FunctionName="ProtectedBrowserModel.Store.LeaveUpdate" />
+          <FunctionImportMapping FunctionImportName="PublicHolidaysInsert" FunctionName="ProtectedBrowserModel.Store.PublicHolidaysInsert" />
+          <FunctionImportMapping FunctionImportName="PublicHolidaysSelect" FunctionName="ProtectedBrowserModel.Store.PublicHolidaysSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProtectedBrowserModel.PublicHolidaysSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StartHoliday" ColumnName="StartHoliday" />
+                <ScalarProperty Name="EndHoliday" ColumnName="EndHoliday" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="IsOnlyView" ColumnName="IsOnlyView" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PublicHolidaysUpdate" FunctionName="ProtectedBrowserModel.Store.PublicHolidaysUpdate" />
+          <FunctionImportMapping FunctionImportName="SelectUserProfileByUniqueCode" FunctionName="ProtectedBrowserModel.Store.SelectUserProfileByUniqueCode">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProtectedBrowserModel.SelectUserProfileByUniqueCode_Result">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="UniqueCode" ColumnName="UniqueCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateUserProfile" FunctionName="ProtectedBrowserModel.Store.UpdateUserProfile" />
+          <FunctionImportMapping FunctionImportName="UploadedFileInsert" FunctionName="ProtectedBrowserModel.Store.UploadedFileInsert" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

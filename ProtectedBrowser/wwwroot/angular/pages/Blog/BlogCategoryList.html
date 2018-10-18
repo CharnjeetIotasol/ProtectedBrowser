@@ -1,0 +1,54 @@
+<div class="breadcrumb-container">
+	<ol class="breadcrumb">
+		<li><a href="#">Home</a></li>
+		<li class="active">Blog Category</li>
+	</ol>
+</div>
+<div class="col-md-12 no-padding text-right margin-bottom-10">
+	<a title="Add" class="btn btn-primary btn-xs" data-ng-click="vm.openCategoryPopup()">Add New Blog Category</a>
+</div>
+<table id="sampleTable" class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th width="200">CreatedOn</th>
+			<th width="60"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr data-ng-repeat="record in vm.recordList" data-on-finish-render data-broadcasteventname="ngRepeatBroadcast1">
+			<td>{{record.name}}</td>
+			<td>{{record.createdDate|date:'MM/dd/yyyy hh:mm'}}</td>
+			<td class="text-center">
+				<a title="Add" class="btn btn-primary btn-xs" data-ng-click=vm.editCategory(record)>Edit</a>
+				<a class="btn btn-danger btn-xs" data-ng-click="vm.remove(record.id)">Delete</a>
+			</td>
+		</tr>
+		<tr data-ng-if="vm.recordList.length==0">
+			<td colspan="6" class="text-center">No Record Found</td>
+		</tr>
+	</tbody>
+</table>
+<div class="modal fade" id="categoryModel" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">{{vm.isNewRecord?'Add Category':'Edit Category'}}</h4>
+        </div>
+        <div class="modal-body">
+	       <form class="form-item" name="categoryForm" novalidate="novalidate">
+	         	<div class="form-group" data-ng-class="{'has-error':(categoryForm.name.$error.required) && vm.onClickValidation}">
+					<h5 class="ng-binding">Name</h5>
+					<input class="form-control" type="text" placeholder="Enter Name" name="name" data-ng-model="vm.category.name" required="required">
+				</div>
+				<div class="pull-right">
+					<button class="btn btn-primary btn-sm site-button" data-ng-click="vm.save(categoryForm.$valid)">{{vm.isNewRecord?"Save":"Update" | translate}}</button>
+		        </div>
+		        <div class="clearfix"></div>
+	        </form>
+        </div>
+      </div>
+    </div>
+  </div>

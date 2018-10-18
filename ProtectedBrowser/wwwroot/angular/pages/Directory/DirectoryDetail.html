@@ -1,0 +1,73 @@
+<div class="breadcrumb-container">
+	<ol class="breadcrumb">
+		<li><a data-ui-sref="dashboard">{{"COMMON.HOME" | translate}}</a></li>
+		<li><a data-ui-sref="DirectoryList">Directory</a></li>
+		<li class="active">{{vm.record.name}}</li>
+	</ol>
+</div>
+<div class="col-md-12 no-padding text-right margin-bottom-10">
+	<a data-ng-if="AuthRepository.isAccessible(DirectoryAddButton)" data-ng-disabled="AuthRepository.isDisabled(DirectoryAddButton)" title="{{"COMMON.ADD" | translate}}" class="btn btn-primary btn-xs" data-ui-sref="DirectoryEdit({id:0})">
+		Add New Directory
+	</a>
+</div>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<td colspan="2">DirectoryE: <b>{{vm.record.name}}</b>
+				<a class="btn btn-danger btn-xs pull-right  margin-left-5" data-ng-if="AuthRepository.isAccessible(DirectoryDeleteButton)" data-ng-disabled="AuthRepository.isDisabled(DirectoryDeleteButton)" data-ng-click="vm.remove(record.id)">
+					"{{"COMMON.DELETE" | translate}}"
+				</a>
+				<a class="btn btn-primary btn-xs pull-right" data-ng-if="AuthRepository.isAccessible(DirectoryEditButton)" data-ng-disabled="AuthRepository.isDisabled(DirectoryEditButton)" data-ui-sref="DirectoryEdit({id: record.id})">
+					"{{"COMMON.EDIT" | translate}}"
+				</a>
+			</td>
+		</tr>
+	</thead>
+	<tbody>
+		 	<tr>
+				<td width="250">{{"Directory.id" | translate}}</td>
+            <td>{{vm.record.id}}</td>
+            </tr>
+		 	<tr>
+				<td width="250">{{"Directory.rootPath" | translate}}</td>
+            <td>{{vm.record.rootPath}}</td>
+            </tr>
+		 	<tr>
+				<td width="250">{{"Directory.userName" | translate}}</td>
+            <td>{{vm.record.userName}}</td>
+            </tr>
+		 	<tr>
+				<td width="250">{{"Directory.password" | translate}}</td>
+            <td>{{vm.record.password}}</td>
+            </tr>
+		 	<tr>
+				<td width="250">{{"Directory.name" | translate}}</td>
+            <td>{{vm.record.name}}</td>
+            </tr>
+		 	<tr>
+				<td width="250">{{"Directory.createdOn" | translate}}</td>
+             <td>{{vm.record.createdOn|date:'MM/dd/yyyy'}}</td>
+            </tr>
+		 	<tr>
+				<td width="250">{{"Directory.updatedOn" | translate}}</td>
+             <td>{{vm.record.updatedOn|date:'MM/dd/yyyy'}}</td>
+            </tr>
+		 	<tr>
+				<td width="250">{{"Directory.isDeleted" | translate}}</td>
+            <td>{{vm.record.isDeleted}}</td>
+            </tr>
+		 	<tr>
+				<td width="250">{{"Directory.isActive" | translate}}</td>
+            <td>{{vm.record.isActive}}</td>
+            </tr>
+		 	<tr>
+				<td width="250">{{"Directory.createdBy" | translate}}</td>
+            <td>{{vm.record.createdBy}}</td>
+            </tr>
+		 	<tr>
+				<td width="250">{{"Directory.updatedBy" | translate}}</td>
+            <td>{{vm.record.updatedBy}}</td>
+            </tr>
+	</tbody>
+</table>
+

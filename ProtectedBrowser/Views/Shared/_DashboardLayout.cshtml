@@ -1,0 +1,200 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en" data-ng-app="applicationApp">
+
+<head>
+    <title>ProtectedBrowser</title>
+    <meta name="description" content="" />
+    <base href="/">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="~/wwwroot/scss/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .choose-language-flag {
+            margin-right: 3px;
+            height: 15px;
+            width: 18px;
+        }
+
+        .flag-submenu .choose-language-flag {
+            margin-right: 3px;
+        }
+
+        .checkbox-header-container .animated-checkbox label {
+            margin: 0;
+        }
+
+        .custom-table.dataTable thead .checkbox-header-container.sorting_asc:after {
+            content: "" !important;
+            display: none;
+            pointer-events: none;
+        }
+
+        .custom-table.dataTable thead .checkbox-header-container.sorting_desc:after {
+            content: "" !important;
+            display: none;
+            pointer-events: none;
+        }
+
+        .custom-table.dataTable thead .checkbox-header-container.sorting:after {
+            content: "" !important;
+            display: none;
+            pointer-events: none;
+        }
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+		  display: none !important;
+		}
+    </style>
+</head>
+
+<body class="sidebar-mini fixed ng-cloak">
+    <div class="wrapper">
+        <!-- Navbar-->
+        <header class="main-header hidden-print" data-ng-controller="HeaderController as vm">
+            <a class="logo" href="index.html">ProtectedBrowser</a>
+            <nav class="navbar navbar-static-top">
+
+                <!-- Sidebar toggle button-->
+                <a class="sidebar-toggle" href="#" data-toggle="offcanvas"></a>
+
+                <!-- Navbar Right Menu-->
+                <div class="navbar-custom-menu">
+                    <ul class="top-nav">
+                        <!-- User Menu-->
+                        <li class="dropdown custom">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg"></i></a>
+                            <ul class="dropdown-menu settings-menu">
+                                <li><a data-ui-sref="accountSettings"><i class="fa fa-cog fa-lg"></i>{{"PROFILE" | translate}}</a></li>
+                                <li><a data-ui-sref="changePassword"><i class="fa fa-cog fa-lg"></i> Change Password </a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span data-ng-show="vm.getChosenLanguage() ==='en-US'"><img class="choose-language-flag" src="images/england-flag.png" /> English </span>
+                                        <span data-ng-show="vm.getChosenLanguage() ==='it-IT'"><img class="choose-language-flag" src="images/italian-flag.png" /> Italian </span>
+                                    </a>
+                                    <ul class="dropdown-menu flag-submenu">
+                                        <li>
+                                            <a data-ng-click="vm.changeLanguage('en-US');event.preventDefault();event.stopPropagation();"><img class="choose-language-flag" src="images/england-flag.png" />English</a>
+                                        </li>
+                                        <li>
+                                            <a data-ng-click="vm.changeLanguage('it-IT');event.preventDefault();event.stopPropagation();"><img class="choose-language-flag" src="images/italian-flag.png" />Italian</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a data-ng-click="signOff()"><i class="fa fa-sign-out fa-lg"></i> Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Side-Nav-->
+        <aside class="main-sidebar hidden-print">
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img class="img-circle" data-ng-src="{{user.profilePic}}" alt="User Image" data-ng-if="user.profilePic!=null && user.profilePic!=''">
+                        <img class="img-circle" src="/wwwroot/images/no_user.jpg" alt="User Image" data-ng-if="user.profilePic==null || user.profilePic==''">
+                    </div>
+                    <div class="pull-left info">
+                        <p class="user-fullName">{{user.fullName}}</p>
+                        <p class="designation">Super Admin</p>
+                    </div>
+                </div>
+                <!-- Sidebar Menu-->
+                <ul class="sidebar-menu">
+                    <li data-ng-class="{'active':_viewPage==''}">
+                        <a data-ui-sref="/">
+                            <i class="lnr lnr-home"></i>
+                            <span> Dashboard</span>
+                        </a>
+                    </li>
+				    	<li data-ng-class="{'active':(_viewPage=='DirectoryList' || _viewPage=='DirectoryEdit' || _viewPage=='DirectoryDetail')}">
+	                        <a data-ui-sref="DirectoryList">
+	                            <i class="lnr lnr-laptop"></i>
+	                            <span>Directory</span>
+	                        </a>
+	                    </li>
+                    <li>
+                        <a data-ng-click="signOff()">
+                            <i class="lnr lnr-exit"></i>
+                            <span> Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+    </div>
+
+
+    <script>
+        var apiBaseUrl = '/';
+        var secureApiBaseUrl = apiBaseUrl + "/api/";
+        var publicApiBaseUrl = apiBaseUrl;
+
+    </script>
+    <!-- Common Files -->
+    <script type="text/javascript" src="~/wwwroot/js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="~/wwwroot/js/plugins/moment.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/sweetalert.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/bootstrap-notify.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/chart.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/jquery-ui.custom.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/select2.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/pace.min.js"></script>
+
+    <script type="text/javascript" src="~/wwwroot/js/angular/angular.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/angular/angular-resource.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/dirPagination.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/angular-file-upload.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/angular-translate.min.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/plugins/angular-translate-loader-static-files.js"></script>
+
+    <script type="text/javascript" src="~/wwwroot/js/main.js"></script>
+
+    <!-- Application Base Files -->
+    <script type="text/javascript" src="~/wwwroot/app.js"></script>
+    <script type="text/javascript" src="~/wwwroot/js/common.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/common/commonService.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/common/commonUtils.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/interceptor/auth.interceptor.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/signIn/oAuthValidateService.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/common/constants.js"></script>
+
+    <!--Controllers-->
+    <script type="text/javascript" src="~/wwwroot/angular/signIn/signInController.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/account/accountSettingsController.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/account/changePasswordController.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/account/recoverPasswordController.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/header/headerController.js"></script>
+    	<script type="text/javascript" src="~/wwwroot/angular/pages/Directory/DirectoryListController.js"></script>
+		<script type="text/javascript" src="~/wwwroot/angular/pages/Directory/DirectoryEditController.js"></script>
+		<script type="text/javascript" src="~/wwwroot/angular/pages/Directory/DirectoryDetailController.js"></script>
+	<!--@@NEW_CONTROLLER_FILE_HERE@@  -->
+	
+    <!--Repositories-->
+    <script type="text/javascript" src="~/wwwroot/angular/signIn/signInRepository.js"></script>
+    <script type="text/javascript" src="~/wwwroot/angular/account/accountRepository.js"></script>
+		<script type="text/javascript" src="~/wwwroot/angular/pages/Directory/DirectoryRepository.js"></script>
+    <!--@@NEW_REPOSITORY_FILE_HERE@@  -->
+</body>
+
+</html>

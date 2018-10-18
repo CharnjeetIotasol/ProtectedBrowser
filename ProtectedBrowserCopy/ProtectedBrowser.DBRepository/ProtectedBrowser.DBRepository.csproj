@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{929F21A8-EBE1-4134-950C-93111AE7C08D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProtectedBrowser.DBRepository</RootNamespace>
+    <AssemblyName>ProtectedBrowser.DBRepository</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid, Version=8.0.5.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sendgrid.8.0.5\lib\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid.CSharp.HTTP.Client, Version=3.0.0.0, Culture=neutral, PublicKeyToken=79219bf4e5ecaaca, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SendGrid.CSharp.HTTP.Client.3.0.0\lib\SendGrid.CSharp.HTTP.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppointmentSelect_Result.cs">
+      <DependentUpon>ProtectedBrowserDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Appointment\AppointmentDBService.cs" />
+    <Compile Include="BlogSelect_Result.cs">
+      <DependentUpon>ProtectedBrowserDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Blog\BlogDBService.cs" />
+    <Compile Include="CategorySelect_Result.cs">
+      <DependentUpon>ProtectedBrowserDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Category\CategoryDbService.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Configuration\EmailConfigurationDBService.cs" />
+    <Compile Include="ContactUsSelect_Result.cs">
+      <DependentUpon>ProtectedBrowserDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ContactUs\ContactUsDBService.cs" />
+    <Compile Include="DailyWorkSettingSelect_Result.cs">
+      <DependentUpon>ProtectedBrowserDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DailyWorkSetting\DailyWorkSettingDBService.cs" />
+    <Compile Include="DirectorySelect_Result.cs">
+      <DependentUpon>ProtectedBrowserDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Directory\DirectoryDBService.cs" />
+    <Compile Include="DummyFileUpload\DummyFileUploadDBService.cs" />
+    <Compile Include="DummyTableForFileSelect_Result.cs">
+      <DependentUpon>ProtectedBrowserDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailConfigurationSelect_Result.cs">
+      <DependentUpon>ProtectedBrowserDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Exception\ExceptionDBService.cs" />
+    <Compile Include="FileGroup\FileGroupDBService.cs" />
+    <Compile Include="LeaveSelect_Result.cs">
+      <DependentUpon>ProtectedBrowserDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Leave\LeaveDBService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProtectedBrowserDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProtectedBrowserDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProtectedBrowserDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProtectedBrowserDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProtectedBrowserDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProtectedBrowserDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="PublicHolidaysSelect_Result.cs">
+      <DependentUpon>ProtectedBrowserDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PublicHoliday\PublicHolidayDBService.cs" />
+    <Compile Include="SelectUserProfileByUniqueCode_Result.cs">
+      <DependentUpon>ProtectedBrowserDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UploadFile\UploadFileDbService.cs" />
+    <Compile Include="Users\UserDBService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="ProtectedBrowserDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProtectedBrowserDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ProtectedBrowserDb.edmx.diagram">
+      <DependentUpon>ProtectedBrowserDb.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{ED04D7B4-E978-4A0E-9374-06DB6E35D728}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProtectedBrowser.Domain\ProtectedBrowser.Domain.csproj">
+      <Project>{c6acc3e9-9057-4b62-84e9-e77339d9e6b1}</Project>
+      <Name>ProtectedBrowser.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ProtectedBrowserDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProtectedBrowserDb.edmx</DependentUpon>
+      <LastGenOutput>ProtectedBrowserDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ProtectedBrowserDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ProtectedBrowserDb.edmx</DependentUpon>
+      <LastGenOutput>ProtectedBrowserDb.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

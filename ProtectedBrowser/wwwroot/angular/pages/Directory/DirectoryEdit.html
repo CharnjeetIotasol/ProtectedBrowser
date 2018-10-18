@@ -1,0 +1,86 @@
+<div class="breadcrumb-container">
+	<ol class="breadcrumb">
+		<li><a data-ui-sref="/dashboard">{{"COMMON.HOME" | translate}}</a></li>
+		<li><a data-ui-sref="DirectoryList">Directory</a></li>
+		<li class="active">{{vm.isNewRecord?'New Directory':'Update '+vm.record.name}}</li>
+	</ol>
+</div>
+<div class="panel panel-primary edit-page-form">
+	<div class="panel-heading">
+		<h3 class="panel-title">Directory {{vm.isNewRecord?'New':'Edit'}}</h3>
+	</div>
+	<div class="panel-body">
+		<form name="recordForm" novalidate="novalidate">
+			<h3 class="form-sub-title">{{"EDIT.BASIC_INFO" | translate}}</h3>
+			<hr class="margin-bottom-40">
+			<div class="row">
+            	<div class="col-md-6">
+					<div class="form-group row" >
+						<label class="control-label text-right col-md-3">
+							{{"Directory.rootPath" | translate}}
+						</label>
+						<div class="col-md-9">
+									<textarea class="form-control" rows="10" name="RootPath"  data-ng-model="vm.record.rootPath"></textarea>
+						</div>
+					</div>
+				</div>
+            	<div class="col-md-6">
+					<div class="form-group row" >
+						<label class="control-label text-right col-md-3">
+							{{"Directory.userName" | translate}}
+						</label>
+						<div class="col-md-9">
+									<input class="form-control" type="text" name="UserName"  data-ng-model="vm.record.userName"> 
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+            	<div class="col-md-6">
+					<div class="form-group row" >
+						<label class="control-label text-right col-md-3">
+							{{"Directory.password" | translate}}
+						</label>
+						<div class="col-md-9">
+									<input class="form-control" type="text" name="Password"  data-ng-model="vm.record.password"> 
+						</div>
+					</div>
+				</div>
+            	<div class="col-md-6">
+					<div class="form-group row" >
+						<label class="control-label text-right col-md-3">
+							{{"Directory.name" | translate}}
+						</label>
+						<div class="col-md-9">
+									<input class="form-control" type="text" name="Name"  data-ng-model="vm.record.name"> 
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+            	<div class="col-md-6">
+					<div class="form-group row" data-ng-class="{'has-error':recordForm.IsActive.$error.required && vm.onClickValidation}">
+						<label class="control-label text-right col-md-3">
+							{{"Directory.isActive" | translate}}
+						</label>
+						<div class="col-md-9">
+							<div class="material-switch">
+								<input id="someSwitchOptionPrimary" name="someSwitchOption001" type="checkbox" data-ng-model="vm.record.isActive" />
+								<label for="someSwitchOptionPrimary" class="label-primary"></label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</form>
+	</div>
+	<div class="panel-footer text-right">
+		<button class="btn btn-primary site-button" type="button" data-ng-click="vm.save(recordForm.$valid)">
+			{{"COMMON.SAVE" | translate}}
+		</button>
+		<a class="btn btn-default site-cancel-button" type="button" data-ui-sref="DirectoryList">
+			{{"COMMON.CANCEL" | translate}}
+		</a>
+	</div>
+</div>
+
+

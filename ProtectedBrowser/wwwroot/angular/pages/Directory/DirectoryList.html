@@ -1,0 +1,45 @@
+<div class="breadcrumb-container">
+	<ol class="breadcrumb">
+		<li><a data-ui-sref="dashboard">{{"COMMON.HOME" | translate}}</a></li>
+		<li class="active">Directory</li>
+	</ol>
+</div>
+<div class="col-md-12 no-padding text-right margin-bottom-10">
+	<a title="{{"COMMON.ADD" | translate}}" class="btn btn-primary btn-xs" data-ui-sref="DirectoryEdit({id:0})">
+		Add New Directory
+	</a>
+</div>
+<div data-ng-if="!vm.loading">
+<table id="sampleTable" class="table table-bordered table-striped">
+	<thead>
+        <tr>
+            <th>Id</th>
+            <th>RootPath</th>
+            <th>UserName</th>
+            <th>Name</th>
+            <th>CreatedOn</th>
+			<th width="120"></th>
+        </tr>
+    </thead>
+    <tbody>
+		<tr data-ng-repeat="record in vm.recordList" data-on-finish-render data-broadcasteventname="ngRepeatBroadcast1">
+            <td><a class="primary-color" data-ui-sref="DirectoryDetail({id: record.id})">{{record.id}}</a></td>
+            <td>{{record.rootPath}}</td>
+            <td>{{record.userName}}</td>
+            <td>{{record.name}}</td>
+            <td>{{record.createdOn|date:'MM/dd/yyyy hh:mm'}}</td>
+			<td class="text-center">
+				<a class="btn btn-primary btn-xs" data-ui-sref="DirectoryEdit({id: record.id})">
+					{{"COMMON.EDIT" | translate}}
+				</a>
+				<a class="btn btn-danger btn-xs" data-ng-click="vm.remove(record.id)">
+					{{"COMMON.DELETE" | translate}}
+				</a>
+			</td>
+		</tr>
+		<tr class="text-center" data-ng-if="vm.recordList.length == 0">
+			<td colspan="11">No records found</td>
+		</tr>
+	</tbody>   
+</table>
+</div>
