@@ -16,6 +16,7 @@
 	<link rel="stylesheet" href="~/wwwroot/css/style.css">
     <link rel="stylesheet" href="~/wwwroot/css/viewer.css">
     <link rel="stylesheet" href="~/wwwroot/css/jquery.Jcrop.css">
+    <link rel="stylesheet" href="~/wwwroot/css/imgareaselect-animated.css">
     
 </head>
 
@@ -91,6 +92,9 @@
     <script src="~/wwwroot/js/plugins/tiff.min.js"></script>
     <script src="~/wwwroot/js/viewer.js"></script>
     <script src="~/wwwroot/js/jquery.Jcrop.min.js"></script>
+    <script src="~/wwwroot/js/plugins/image-plugin/jquery.imgareaselect.pack.js"></script>
+    <script src="~/wwwroot/js/plugins/image-plugin/jquery.mousewheel.js"></script>
+    <script src="~/wwwroot/js/plugins/image-plugin/jquery.panzoom.js"></script>
     <script type="text/javascript">
         jQuery.browser = {};
         (function () {
@@ -101,6 +105,7 @@
                 jQuery.browser.version = RegExp.$1;
             }
         })();
+        Tiff.initialize({ TOTAL_MEMORY: 19777216 * 10 });
     </script>
 </body>
 </html>

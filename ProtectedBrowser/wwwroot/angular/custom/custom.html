@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="d-height col-md-4">
+    <div class="d-height col-md-3">
         <ul class="nav nav-stacked" id="accordion1">
             <li class="panel">
                 <a data-toggle="collapse" href="#rootFolder" aria-expanded="true">
@@ -8,24 +8,27 @@
                 </a>
                 <ul id="rootFolder" class="collapse in">
                     <!--Parent Folders-->
-                    <li data-ng-repeat="(key , folder) in vm.folderData.Folders" ng-click="!vm.isProcessInrequesting ? vm.getChildFolderDetails(folder.Name, 'child-0-'+key+'', $event) : '';">
+                    <li data-ng-repeat="(key , folder) in vm.folderData.Folders">
                         <a data-toggle="collapse" href="#child-0-{{key}}">
-                            <span><img class="height-25 margin-right-5" src="images/folder.png" />{{folder.Name}}</span>
+                            <span class="full-display" ng-click="!vm.isProcessInrequesting ? vm.getChildFolderDetails(folder.Name, 'child-0-'+key+'', $event) : '';$event.stopPropagation();$event.preventDefault();"><img class="height-25 margin-right-5" src="images/folder.png" /><span>{{folder.Name}}</span></span>
                         </a>
                     </li>
 
                     <!--Parent Files-->
-                    <li class="file-li" data-ng-repeat="file in vm.folderData.Files" ng-click="!vm.isProcessInrequesting ? vm.viewFile(vm.encrypt(file.Path), file.Ext, $event) : '';">
-                        <span><img class="height-17 margin-right-5" src="images/file.png" />{{file.Name}}</span>
+                    <li class="file-li" data-ng-repeat="file in vm.folderData.Files">
+                        <span class="full-display" ng-click="!vm.isProcessInrequesting ? vm.viewFile(vm.encrypt(file.Path), file.Ext, $event) : '';$event.stopPropagation();$event.preventDefault();"><img class="height-17 margin-right-5" src="images/file.png" /><span>{{file.Name}}</span></span>
                     </li>
                 </ul>
             </li>
         </ul>
     </div>
-    <div class="d-height text-center col-md-7">
+    <div class="d-height text-center col-md-8">
         <div id="file-container">
-
+            <h2>
+                Click on file to get preview.
+            </h2>
         </div>
+        <canvas id="c"></canvas>
         <img id="crop-viewer" />
     </div>
     <div class="d-height col-md-1">

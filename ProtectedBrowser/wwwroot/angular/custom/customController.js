@@ -40,8 +40,10 @@
             vm.paginateData = [];
             vm.isCropInProcess = false;
             vm.currentViewFileType = '';
-            vm.paginationValue = 500;
+            vm.paginationValue = 200;
             vm.cropper;
+            vm.jcropApi;
+            vm.cropApi;
             closeNav();
         }
 
@@ -74,7 +76,7 @@
             }
 
             for (var i = startFrom; i < endTo; i++) {
-                html += `<li class="file-li" ng-click='vm.viewFile("` + encrypt(vm.paginateData[i].Path) + `" , "` + vm.paginateData[i].Ext + `", $event);$event.stopPropagation();$event.preventDefault();'><span><img class ="height-17" src="images/file.png" />` + vm.paginateData[i].Name + `</span></li>`
+                html += `<li class="file-li"><span class="full-display" ng-click='vm.viewFile("` + encrypt(vm.paginateData[i].Path) + `" , "` + vm.paginateData[i].Ext + `", $event);$event.stopPropagation();$event.preventDefault();'><img class ="height-17 margin-right-5"  src="images/file.png" /><span>` + vm.paginateData[i].Name + `</span></span></li>`
             }
 
             $('#load-more').remove();
@@ -87,7 +89,7 @@
                 return html;
             }
 
-            $("[href=#" + hrefVal + "]").parent('li').append($compile(html)($scope));
+            $("#" + hrefVal).append($compile(html)($scope));
         }
 
         function appendChildHtml(data, stringToAppend, hrefVal, element) {
@@ -98,7 +100,7 @@
             if (data.Folders.length > 0) {
                 for (var i = 0; i < data.Folders.length; i++) {
                     var path = (stringToAppend ? decodeURIComponent(stringToAppend) + '\\\\' : '') + data.Folders[i].Name + "";
-                    html += `<li ng-click='vm.getChildFolderDetails("` + encodeURIComponent(path) + `" , "child-` + vm.childLevel + `-` + i + `", $event);$event.stopPropagation();$event.preventDefault();'><a data-toggle="collapse" href=` + '#child-' + vm.childLevel + '-' + i + `><span><img class ="height-25" src="images/folder.png" />` + data.Folders[i].Name + `</span></a></li>`
+                    html += `<li><a data-toggle="collapse" href=` + '#child-' + vm.childLevel + '-' + i + `><span class="full-display" ng-click='vm.getChildFolderDetails("` + encodeURIComponent(path) + `" , "child-` + vm.childLevel + `-` + i + `", $event);$event.stopPropagation();$event.preventDefault();'><img class ="height-25 margin-right-5" src="images/folder.png" /><span>` + data.Folders[i].Name + `</span></span></a></li>`
                 }
             }
 
@@ -110,7 +112,7 @@
                 }
                 else {
                     for (var i = 0; i < data.Files.length; i++) {
-                        html += `<li class="file-li" ng-click='vm.viewFile("` + encrypt(data.Files[i].Path) + `" , "` + data.Files[i].Ext + `", $event);$event.stopPropagation();$event.preventDefault();'><span><img class ="height-17" src="images/file.png" />` + data.Files[i].Name + `</span></li>`
+                        html += `<li class="file-li"><span class="full-display" ng-click='vm.viewFile("` + encrypt(data.Files[i].Path) + `" , "` + data.Files[i].Ext + `", $event);$event.stopPropagation();$event.preventDefault();'><img class ="height-17 margin-right-5" src="images/file.png" /><span>` + data.Files[i].Name + `</span></span></li>`
                     }
                 }
             }
@@ -138,49 +140,64 @@
 
             var element = angular.element(object.target);
             showMiniLoader(element);
-            CustomRepository.getFile({ sDir: decrypt(path) }, function (response) {
+            CustomRepository.getFile({ sDir: decrypt(path), ext: ext }, function (response) {
                 if (!response.status)
                     return;
 
-                if (ext == 'jpg') {
+                $("#file-container").html('');
+
+                if ($('#c').length == 0)
+                    $("#file-container").after('<canvas id="c"></canvas>');
+
+                if (ext == 'jpg' || ext == 'tif') {
                     var id = 'image';
                     vm.currentViewFileType = '#' + id;
-                    memeType = "data:image/png;base64,";
-                    vm.currentBase = memeType + response.data.stream;
-                    html = `<img id="` + id + `" src="` + vm.currentBase + `" />`
-                    
-                    $("#file-container").html($compile(html)($scope));
-                    //var viewer = new Viewer(document.getElementById('image'), {
-                    //    inline: true,
-                    //    viewed: function () {
-                    //        viewer.zoomTo(1);
-                    //    }
-                    //});
+                    b64toBlob(response.data.stream, 'image/png').then(function (resp) {
+                        vm.currentBase = URL.createObjectURL(resp);
+
+	                    // Grab the Canvas and Drawing Context
+	                    var canvas = document.getElementById('c');
+	                    var ctx = canvas.getContext('2d');
+
+	                    // Create an image element
+	                    var img = document.createElement('IMG');
+
+	                    // When the image is loaded, draw it
+	                    img.onload = function () {
+	                        $('#c').attr('width', img.width);
+	                        $('#c').attr('height', img.height);
+
+	                        ctx.drawImage(img, 0, 0);
+
+	                        var panzoom = $('#c').panzoom({	
+	                            $reset: $("#revertZoom"),
+	                            maxZoom: 1,
+	                            minZoom: 0.1
+	                        });
+
+	                        panzoom.parent().on('mousewheel.focal', function( e ) {
+	    	                    e.preventDefault();
+	                            var delta = e.delta || e.originalEvent.wheelDelta;
+	                            var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+	                            panzoom.panzoom('zoom', zoomOut, {
+	        	                    increment: 0.1,
+	                                focal: e
+	                            });
+	                        });
+	    
+	                    }
+	                    img.src = vm.currentBase;
+                    });
                 }
 
                 if (ext == 'pdf') {
                     vm.currentViewFileType = 'canvas';
-                    var blob = b64toBlob(response.data.stream, 'application/pdf');
-                    var blobUrl = URL.createObjectURL(blob);
-                    $scope.pdfUrl = blobUrl;
-                    html = `<ng-pdf template-url="wwwroot/viewer.html"></ng-pdf>`;
-                    $("#file-container").html($compile(html)($scope));
-                }
-
-                if (ext == 'tif') {
-                    vm.currentViewFileType = 'canvas';
-                    memeType = "data:image/tiff;base64,";
-                    vm.currentBase = memeType + response.data.stream;
-                    Tiff.initialize({TOTAL_MEMORY: 19777216 * 10});
-                    var xhr = new XMLHttpRequest();
-                    xhr.responseType = 'arraybuffer';
-                    xhr.open('GET', vm.currentBase);
-                    xhr.onload = function (e) {
-                        var tiff = new Tiff({ buffer: xhr.response });
-                        var canvas = tiff.toCanvas();
-                        $("#file-container").html(canvas);
-                    };
-                    xhr.send();
+                    b64toBlob(response.data.stream, 'application/pdf').then(function (resp) {
+                        var blobUrl = URL.createObjectURL(resp);
+                        $scope.pdfUrl = blobUrl;
+                        html = `<ng-pdf template-url="wwwroot/viewer.html"></ng-pdf>`;
+                        $("#file-container").html($compile(html)($scope));
+                    });
                 }
                 hideMiniLoader(element, 'file');
             });
@@ -212,7 +229,20 @@
             return JSON.parse(atob(data));
         };
 
+        function _base64ToArrayBuffer(base64) {
+            var deferred = $q.defer();
+            var binary_string = window.atob(base64);
+            var len = binary_string.length;
+            var bytes = new Uint8Array(len);
+            for (var i = 0; i < len; i++) {
+                bytes[i] = binary_string.charCodeAt(i);
+            }
+            deferred.resolve(bytes.buffer);
+            return deferred.promise;
+        }
+
         function b64toBlob(b64Data, contentType, sliceSize) {
+            var deferred = $q.defer();
             contentType = contentType || '';
             sliceSize = sliceSize || 512;
 
@@ -232,23 +262,26 @@
             }
 
             var blob = new Blob(byteArrays, { type: contentType });
-            return blob;
+            deferred.resolve(blob);
+            return deferred.promise;
         }
 
         function showMiniLoader(object) {
             vm.isCropInProcess = false;
+            clearCrop();
+
             $('#crop-viewer').css('display', 'none');
             $('canvas').css('display', 'inline-block');
-            $(object).children('img').remove();
+            $(object).parent('.full-display').children('img').remove();
             $(object).prepend('<i class="margin-right-5 font-size-15 fa fa-spinner fa-spin"></i>');
         }
 
         function hideMiniLoader(object, callFrom) {
             $(object).children('i').remove();
-            $(object).prepend(callFrom == "folder" ? '<img class="margin-right-5 height-25" src="images/folder.png" />' : '<img class="margin-right-5 height-17" src="images/file.png" />');
+            $(object).parent('.full-display').prepend(callFrom == "folder" ? '<img class="margin-right-5 height-25" src="images/folder.png" />' : '<img class="margin-right-5 height-17" src="images/file.png" />');
         }
 
-        function updatePreview(c) {
+        function updatePreviewForPdf(c) {
             if (parseInt(c.w) > 0) {
                 var canvas = $(vm.currentViewFileType),
                     tempCanvas = document.createElement("canvas"),
@@ -263,16 +296,71 @@
             }
         }
 
+        function updatePreviewForTif(selection) {
+            var canvas = $('#c'),
+                    tempCanvas = document.createElement("canvas"),
+                    tCtx = tempCanvas.getContext("2d");
+
+            tempCanvas.width = 640;
+            tempCanvas.height = 480;
+
+            tCtx.drawImage(canvas[0], selection.x1, selection.y1, selection.width, selection.height, 0, 0, selection.width, selection.height);
+            var img = tempCanvas.toDataURL("image/png");
+            $('#crop-viewer').attr('src', img).css('display', 'block');
+        }
+
+        vm.cropApi = $('#c').imgAreaSelect({
+            instance: true,
+            handles: true,
+            disable: true,
+            onSelectEnd: function (img, selection) {
+                if (!selection.width || !selection.height) {
+                    return;
+                }
+                updatePreviewForTif(selection);
+            },
+            onSelectStart: function (img, selection) {
+                if (!selection.width || !selection.height) {
+                    return;
+                }
+                updatePreviewForTif(selection);
+            },
+            onSelectChange: function (img, selection) {
+                if (!selection.width || !selection.height) {
+                    return;
+                }
+                updatePreviewForTif(selection);
+            }
+        });
+
         function cropImage() {
-            vm.isCropInProcess = true;            
-            $(vm.currentViewFileType).Jcrop({
-                onChange: updatePreview,
-                onSelect: updatePreview,
+            vm.isCropInProcess = true;
+            if (vm.currentViewFileType == '#image') {
+                $('#c').panzoom("reset");
+                $('#c').panzoom("disable");
+                $('#c')[0].style.cssText = "";
+                vm.cropApi.setOptions({ enable: true });
+                return;
+            }
+
+            vm.jcropApi = $.Jcrop(vm.currentViewFileType, {
+                onChange: updatePreviewForPdf,
+                onSelect: updatePreviewForPdf,
                 allowSelect: true,
                 allowMove: true,
                 allowResize: true,
                 aspectRatio: 0
             });
+        }
+
+        function clearCrop() {
+            // Disable crop Pdf's
+            if (vm.jcropApi)
+                vm.jcropApi.destroy();
+
+            // Disable crop Images
+            vm.cropApi.setOptions({ hide: true, disable: true });
+            $('#c').panzoom("enable");
         }
 
         function openNav() {
@@ -282,21 +370,6 @@
         function closeNav() {
             $('#mySidenav').css('width', '0');
         }
-
-        function clearCrop() {
-            vm.isCropInProcess = false;
-        }
-
-        
-        function bytetobase(buffer) {
-            var binary = '';
-            var bytes = new Uint8Array(buffer);
-            var len = bytes.byteLength;
-            for (var i = 0; i < len; i++) {
-                binary += String.fromCharCode(bytes[i]);
-            }
-            return window.btoa(binary);
-        };
     }
-   
+
 }());

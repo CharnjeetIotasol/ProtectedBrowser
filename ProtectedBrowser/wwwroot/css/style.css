@@ -1198,12 +1198,20 @@ ul, ol {
     cursor: pointer;
 }
 
-#file-container > .rcrop-preview-wrapper{
+#file-container .rcrop-preview-wrapper{
     position: fixed;
     bottom: 0;
     width: 100%;
     float: right;
 }
+
+#file-container h2{
+    color: grey;
+    position: fixed;
+    top: 48%;
+    left: 50%;
+}
+
 
 /*.fas.fa-print {
     position: relative;
@@ -1256,12 +1264,36 @@ ul, ol {
     z-index: 99999;
 }
 
-#open-btn {
-    font-size:30px;
-    top: calc(100% - 64%);
-    position: relative;
-    left: 64px;
-    cursor:pointer;
+#mySidenav, #open-btn {
+    font-size: 30px;
+    position: fixed;
+    top: 36%;
+    right: 1%;
+}
+
+.full-display{
+    display:inline-block;
+    width:100%;
+}
+
+.full-display img{
+    display: inline-block;
+    width:8%;
+    vertical-align: top;
+}
+
+.full-display span {
+    display: inline-block;
+    width:89%;
+}
+
+ng-pdf nav{
+    position: fixed;
+    top: 0;
+    background: white;
+    width: 67%;
+    padding: 10px 0;
+    right: 117px;
 }
 
 @media screen and (max-height: 450px) {

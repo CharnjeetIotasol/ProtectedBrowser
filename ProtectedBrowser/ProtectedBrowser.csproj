@@ -159,6 +159,14 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SendGrid, Version=8.0.5.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
       <HintPath>..\packages\Sendgrid.8.0.5\lib\SendGrid.dll</HintPath>
       <Private>True</Private>
@@ -354,10 +362,13 @@
     <Content Include="wwwroot\app.js" />
     <Content Include="wwwroot\css\bootstrap-select.min.css" />
     <Content Include="wwwroot\css\bootstrap.min.css" />
+    <Content Include="wwwroot\css\border-anim-h.gif" />
+    <Content Include="wwwroot\css\border-anim-v.gif" />
     <Content Include="wwwroot\css\cropper.css" />
     <Content Include="wwwroot\css\datepicker.css" />
     <Content Include="wwwroot\css\font-awesome.css" />
     <Content Include="wwwroot\css\font-awesome.min.css" />
+    <Content Include="wwwroot\css\imgareaselect-animated.css" />
     <Content Include="wwwroot\css\Jcrop.gif" />
     <Content Include="wwwroot\css\jquery.Jcrop.css" />
     <Content Include="wwwroot\css\rcrop.min.css" />
@@ -430,6 +441,9 @@
     <Content Include="wwwroot\js\plugins\chart.js" />
     <Content Include="wwwroot\js\plugins\dataTables.bootstrap.min.js" />
     <Content Include="wwwroot\js\plugins\fullcalendar.min.js" />
+    <Content Include="wwwroot\js\plugins\image-plugin\jquery.imgareaselect.pack.js" />
+    <Content Include="wwwroot\js\plugins\image-plugin\jquery.mousewheel.js" />
+    <Content Include="wwwroot\js\plugins\image-plugin\jquery.panzoom.js" />
     <Content Include="wwwroot\js\plugins\jquery-ui.custom.min.js" />
     <Content Include="wwwroot\js\plugins\jquery.dataTables.min.js" />
     <Content Include="wwwroot\js\plugins\jquery.vmap.min.js" />
