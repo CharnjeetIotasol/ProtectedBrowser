@@ -22,7 +22,7 @@
             </li>
         </ul>
     </div>
-    <div class="d-height text-center col-md-8">
+    <div class="d-height text-center" ng-class="vm.currentViewFileType ? 'col-md-8' : 'col-md-9'">
         <div id="file-container">
             <h2>
                 Click on file to get preview.
@@ -31,7 +31,7 @@
         <canvas id="c"></canvas>
         <img id="crop-viewer" />
     </div>
-    <div class="d-height col-md-1">
+    <div ng-if="vm.currentViewFileType" class="d-height col-md-1">
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" ng-click="vm.closeNav()">
                 <i class="fa fa-chevron-right"></i>
