@@ -44,7 +44,7 @@
             vm.cropper;
             vm.jcropApi;
             vm.cropApi;
-            closeNav();
+            prepareCanvasForAreaSelect();
         }
 
         function getFolderDetails(path, isRootCall, stringToAppend, hrefVal, element) {
@@ -87,7 +87,7 @@
                 html += `<li id="load-more" ng-click='vm.loadHtmlWithPagination("` + hrefVal + `", "");$event.stopPropagation();$event.preventDefault();'> Load More +</li>`;
 
             vm.pageCount[hrefVal]++;
-            
+
             if (callFrom == 'innerCall')
                 return html;
 
@@ -149,6 +149,7 @@
                 $("#file-container").html('');
                 $("#c").remove();
                 $("#file-container").after('<canvas id="c"></canvas>');
+                prepareCanvasForAreaSelect();
 
                 if (ext == 'jpg' || ext == 'tif' || ext == 'png') {
                     var id = 'image';
@@ -156,37 +157,37 @@
                     b64toBlob(response.data.stream, 'image/png').then(function (resp) {
                         vm.currentBase = URL.createObjectURL(resp);
 
-	                    // Grab the Canvas and Drawing Context
-	                    var canvas = document.getElementById('c');
-	                    var ctx = canvas.getContext('2d');
+                        // Grab the Canvas and Drawing Context
+                        var canvas = document.getElementById('c');
+                        var ctx = canvas.getContext('2d');
 
-	                    // Create an image element
-	                    var img = document.createElement('IMG');
+                        // Create an image element
+                        var img = document.createElement('IMG');
 
-	                    // When the image is loaded, draw it
-	                    img.onload = function () {
-	                        $('#c').attr('width', img.width);
-	                        $('#c').attr('height', img.height);
+                        // When the image is loaded, draw it
+                        img.onload = function () {
+                            $('#c').attr('width', img.width);
+                            $('#c').attr('height', img.height);
 
-	                        ctx.drawImage(img, 0, 0);
+                            ctx.drawImage(img, 0, 0);
 
-	                        var panzoom = $('#c').panzoom({	
-	                            $reset: $("#revertZoom"),
-	                            maxZoom: 1,
-	                            minZoom: 0.1
-	                        });
+                            var panzoom = $('#c').panzoom({
+                                $reset: $("#revertZoom"),
+                                maxZoom: 1,
+                                minZoom: 0.1
+                            });
 
-	                        panzoom.parent().on('mousewheel.focal', function( e ) {
-	    	                    e.preventDefault();
-	                            var delta = e.delta || e.originalEvent.wheelDelta;
-	                            var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
-	                            panzoom.panzoom('zoom', zoomOut, {
-	        	                    increment: 0.1,
-	                                focal: e
-	                            });
-	                        });
-	                    }
-	                    img.src = vm.currentBase;
+                            panzoom.parent().on('mousewheel.focal', function (e) {
+                                e.preventDefault();
+                                var delta = e.delta || e.originalEvent.wheelDelta;
+                                var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+                                panzoom.panzoom('zoom', zoomOut, {
+                                    increment: 0.1,
+                                    focal: e
+                                });
+                            });
+                        }
+                        img.src = vm.currentBase;
                     });
                 }
 
@@ -279,6 +280,7 @@
         function hideMiniLoader(object, callFrom) {
             $(object).children('i').remove();
             $(object).parent('.full-display').prepend(callFrom == "folder" ? '<img class="margin-right-5 height-25" src="images/folder.png" />' : '<img class="margin-right-5 height-17" src="images/file.png" />');
+            closeNav();
         }
 
         function updatePreviewForPdf(c) {
@@ -297,9 +299,12 @@
         }
 
         function updatePreviewForTif(selection) {
+            if (!selection.width || !selection.height) {
+                return;
+            }
             var canvas = $('#c'),
-                    tempCanvas = document.createElement("canvas"),
-                    tCtx = tempCanvas.getContext("2d");
+				tempCanvas = document.createElement("canvas"),
+				tCtx = tempCanvas.getContext("2d");
 
             tempCanvas.width = 640;
             tempCanvas.height = 480;
@@ -309,36 +314,31 @@
             $('#crop-viewer').attr('src', img).css('display', 'block');
         }
 
-        vm.cropApi = $('#c').imgAreaSelect({
-            instance: true,
-            handles: true,
-            disable: true,
-            onSelectEnd: function (img, selection) {
-                if (!selection.width || !selection.height) {
-                    return;
+
+        function prepareCanvasForAreaSelect() {
+            vm.cropApi = $('#c').imgAreaSelect({
+                instance: true,
+                handles: true,
+                disable: true,
+                onSelectEnd: function (img, selection) {
+                    updatePreviewForTif(selection);
+                },
+                onSelectStart: function (img, selection) {
+                    updatePreviewForTif(selection);
+                },
+                onSelectChange: function (img, selection) {
+                    updatePreviewForTif(selection);
                 }
-                updatePreviewForTif(selection);
-            },
-            onSelectStart: function (img, selection) {
-                if (!selection.width || !selection.height) {
-                    return;
-                }
-                updatePreviewForTif(selection);
-            },
-            onSelectChange: function (img, selection) {
-                if (!selection.width || !selection.height) {
-                    return;
-                }
-                updatePreviewForTif(selection);
-            }
-        });
+            });
+        }
+        
 
         function cropImage() {
             vm.isCropInProcess = true;
             if (vm.currentViewFileType == '#image') {
                 $('#c').panzoom("reset");
                 $('#c').panzoom("disable");
-                $('#c')[0].style.cssText = "";
+                // $('#c')[0].style.cssText = "";
                 vm.cropApi.setOptions({ enable: true });
                 return;
             }

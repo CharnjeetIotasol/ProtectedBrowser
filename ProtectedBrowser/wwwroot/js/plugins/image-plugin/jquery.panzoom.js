@@ -308,8 +308,8 @@
 		panOnlyWhenZoomed: false,
 
 		// min and max zoom scales
-		minScale: 0.3,
-		maxScale: 6,
+		minScale: 0.1,
+		maxScale: 1,
 
 		// The default step for the range input
 		// Precendence: default < HTML attribute < option setting
