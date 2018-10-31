@@ -197,7 +197,7 @@ namespace ProtectedBrowser.API
         [Route("filereader")]
         [HttpGet]
         [AllowAnonymous]
-        public IHttpActionResult Base64Encode(string sDir, string ext)
+        public IHttpActionResult Base64Encode(string sDir, string ext, string name)
         {
             FileStream fs;
             var directory = _directoryService.SelectDirectory(10002).FirstOrDefault().ToViewModel();
@@ -206,89 +206,26 @@ namespace ProtectedBrowser.API
 
             //using (new ConnectToSharedFolder(networkPath, theNetworkCredential))
             //{
-                if (ext == "tif")
+                if (ext == "tif" && !File.Exists("C:\\op\\" + name.Split('.')[0] + ".png"))
                 {
-                    try
-                    {
-                        string destinaton = @"C:\\op\\check.png";
-                        Bitmap bitmap = (Bitmap)Image.FromFile(sDir);
-                        MemoryStream byteStream = new MemoryStream();
-                        bitmap.Save(byteStream, ImageFormat.Tiff);
-                        Image tiff = Image.FromStream(byteStream);
-                        ImageCodecInfo encoderInfo = GetEncoderInfo("image/png");
-
-                        EncoderParameters encoderParams = new EncoderParameters(2);
-                        EncoderParameter parameter = new EncoderParameter(
-                        System.Drawing.Imaging.Encoder.Compression, (long)EncoderValue.CompressionCCITT4);
-                        encoderParams.Param[0] = parameter;
-                        parameter = new EncoderParameter(System.Drawing.Imaging.Encoder.SaveFlag, (long)EncoderValue.MultiFrame);
-                        encoderParams.Param[1] = parameter;
-                        //ImageCodecInfo encoderInfo = GetEncoderInfo("image/tiff");
-                        tiff.Save(destinaton, encoderInfo, encoderParams);
-
-
-                    
-
-                        //// for single file
-                        //PdfDocument doc = new PdfDocument();
-                        //XGraphics xgr;
-
-                        //PdfPage page = new PdfPage();
-                        //doc.Pages.Add(page);
-                        //xgr = XGraphics.FromPdfPage(page);
-                        //Image MyImage = Image.FromFile(@sDir);
-                        //float width = MyImage.PhysicalDimension.Width;
-                        //float height = MyImage.PhysicalDimension.Height;
-                        //float hresolution = MyImage.HorizontalResolution;
-                        //float vresolution = MyImage.VerticalResolution;
-                        //XImage ximg = XImage.FromGdiPlusImage(MyImage);
-                        //xgr.DrawImage(ximg, 0, 0, width, height);
-
-
-                        // for multipage tiff
-
-                        //Image MyImage = Image.FromFile(@sDir);
-                        //PdfDocument doc = new PdfDocument();
-                        //for (int PageIndex = 0; PageIndex < MyImage.GetFrameCount(FrameDimension.Page); PageIndex++)
-                        //{
-                        //    MyImage.SelectActiveFrame(FrameDimension.Page, PageIndex);
-                        //    XImage img = XImage.FromGdiPlusImage(MyImage);
-
-                        //    //float width = MyImage.PhysicalDimension.Width;
-                        //    //float height = MyImage.PhysicalDimension.Height;
-                        //    //float hresolution = MyImage.HorizontalResolution;
-                        //    //float vresolution = MyImage.VerticalResolution;
-
-                        //    var page = new PdfPage();
-                        //    if (img.Width > img.Height)
-                        //    {
-                        //        page.Orientation = PageOrientation.Landscape;
-                        //    }
-                        //    else
-                        //    {
-                        //        page.Orientation = PageOrientation.Portrait;
-                        //    }
-                        //    doc.Pages.Add(page);
-                        //    XGraphics xgr = XGraphics.FromPdfPage(doc.Pages[PageIndex]);
-                        //    xgr.DrawImage(img, 0, 0, img.Width, img.Height);
-                        //}
-
-
-                        //doc.Save(destinaton);
-                        //doc.Close();
-                        //MyImage.Dispose();
-                    }
-
-                    catch (Exception ex)
-                    {
-                        return Ok(ex.InnerException.Message.ErrorResponse());
-                    }
-                    //System.Drawing.Bitmap.FromFile(sDir).Save("C:\\op\\check.png", System.Drawing.Imaging.ImageFormat.Png);
+                    string destinaton = @"C:\\op\\"+ name.Split('.')[0] +".png";
+                    Bitmap bitmap = (Bitmap)Image.FromFile(sDir);
+                    MemoryStream byteStream = new MemoryStream();
+                    bitmap.Save(byteStream, ImageFormat.Tiff);
+                    Image tiff = Image.FromStream(byteStream);
+                    ImageCodecInfo encoderInfo = GetEncoderInfo("image/png");
+                    EncoderParameters encoderParams = new EncoderParameters(2);
+                    EncoderParameter parameter = new EncoderParameter(
+                    System.Drawing.Imaging.Encoder.Compression, (long)EncoderValue.CompressionCCITT4);
+                    encoderParams.Param[0] = parameter;
+                    parameter = new EncoderParameter(System.Drawing.Imaging.Encoder.SaveFlag, (long)EncoderValue.MultiFrame);
+                    encoderParams.Param[1] = parameter;
+                    tiff.Save(destinaton, encoderInfo, encoderParams);
                 }
                 try
-                {  
+                {
                     byte[] buffer;
-                    FileStream fileStream = new FileStream((ext == "tif" ? "C:\\op\\check.png" : sDir), FileMode.Open, FileAccess.Read);
+                    FileStream fileStream = new FileStream((ext == "tif" ? "C:\\op\\" + name.Split('.')[0] + ".png" : sDir), FileMode.Open, FileAccess.Read);
                     fileStream.Flush();
 
                     try
@@ -313,31 +250,6 @@ namespace ProtectedBrowser.API
                     return Ok(ex.InnerException.Message.ErrorResponse());
                 }
             //}
-
-            //22-oct
-            //string result;
-            //using (var stream = new MemoryStream())
-            //{
-            //    fs = File.Open(sDir, FileMode.Open);
-            //    byte[] dataBytes = new byte[fs.Length];
-            //    int bytesRead;
-            //    while ((bytesRead = fs.Read(dataBytes, 0, dataBytes.Length)) > 0)
-            //    {
-            //        stream.Write(dataBytes, 0, bytesRead);
-            //    }
-            //    byte[] rs = stream.ToArray();
-            //    result = Convert.ToBase64String(rs);
-            //}
-            //return Ok(new { stream = result }.SuccessResponse());
-
-            ////using (var mmf = MemoryMappedFile.CreateFromFile(@sDir, FileMode.Open, "ImgA"))
-            ////{
-            ////    using (MemoryMappedViewStream stream = mmf.CreateViewStream())
-            ////    {
-            ////        BinaryWriter writer = new BinaryWriter(stream);
-            ////        writer.Write(stream.Length);
-            ////    }
-            ////}
         }
     }
 

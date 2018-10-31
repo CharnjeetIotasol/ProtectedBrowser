@@ -16,7 +16,7 @@
 
                     <!--Parent Files-->
                     <li class="file-li" data-ng-repeat="file in vm.folderData.Files">
-                        <span class="full-display" ng-click="!vm.isProcessInrequesting ? vm.viewFile(vm.encrypt(file.Path), file.Ext, $event) : '';$event.stopPropagation();$event.preventDefault();"><img class="height-17 margin-right-5" src="images/file.png" /><span>{{file.Name}}</span></span>
+                        <span class="full-display" ng-click="!vm.isProcessInrequesting ? vm.viewFile(vm.encrypt(file.Path), file.Ext, file.Name, $event) : '';$event.stopPropagation();$event.preventDefault();"><img class="height-17 margin-right-5" src="images/file.png" /><span>{{file.Name}}</span></span>
                     </li>
                 </ul>
             </li>

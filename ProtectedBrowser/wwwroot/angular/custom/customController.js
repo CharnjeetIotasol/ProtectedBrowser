@@ -36,7 +36,7 @@
             });
             vm.pdfUrl = '';
             vm.isProcessInrequesting = false;
-            vm.pageCount = 0;
+            vm.pageCount = [];
             vm.paginateData = [];
             vm.isCropInProcess = false;
             vm.currentViewFileType = '';
@@ -67,27 +67,29 @@
         }
 
         function loadHtmlWithPagination(hrefVal, callFrom) {
-            var html = ``,
-                startFrom = (vm.pageCount * vm.paginationValue + (vm.pageCount > 0 ? 1 : 0)),
-                endTo = ((vm.pageCount + 1) * vm.paginationValue);
+            if (!vm.pageCount[hrefVal])
+                vm.pageCount[hrefVal] = 0;
 
-            if (vm.paginateData.length < endTo) {
-                endTo = vm.paginateData.length;
-            }
+            var html = ``,
+                startFrom = (vm.pageCount[hrefVal] * vm.paginationValue + (vm.pageCount[hrefVal] > 0 ? 1 : 0)),
+                endTo = ((vm.pageCount[hrefVal] + 1) * vm.paginationValue);
+
+            if (vm.paginateData[hrefVal].length < endTo)
+                endTo = vm.paginateData[hrefVal].length;
 
             for (var i = startFrom; i < endTo; i++) {
-                html += `<li class="file-li"><span class="full-display" ng-click='vm.viewFile("` + encrypt(vm.paginateData[i].Path) + `" , "` + vm.paginateData[i].Ext + `", $event);$event.stopPropagation();$event.preventDefault();'><img class ="height-17 margin-right-5"  src="images/file.png" /><span>` + vm.paginateData[i].Name + `</span></span></li>`
+                html += `<li class="file-li"><span class="full-display" ng-click='vm.viewFile("` + encrypt(vm.paginateData[hrefVal][i].Path) + `" , "` + vm.paginateData[hrefVal][i].Ext + `", "` + vm.paginateData[hrefVal][i].Name + `", $event);$event.stopPropagation();$event.preventDefault();'><img class ="height-17 margin-right-5"  src="images/file.png" /><span>` + vm.paginateData[hrefVal][i].Name + `</span></span></li>`
             }
 
-            $('#load-more').remove();
-            if (vm.paginateData.length > endTo) {
+            $('#' + hrefVal + ' #load-more').remove();
+
+            if (vm.paginateData[hrefVal].length > endTo)
                 html += `<li id="load-more" ng-click='vm.loadHtmlWithPagination("` + hrefVal + `", "");$event.stopPropagation();$event.preventDefault();'> Load More +</li>`;
-            }
-            vm.pageCount++;
 
-            if (callFrom == 'innerCall') {
+            vm.pageCount[hrefVal]++;
+            
+            if (callFrom == 'innerCall')
                 return html;
-            }
 
             $("#" + hrefVal).append($compile(html)($scope));
         }
@@ -107,12 +109,12 @@
             /*Files append*/
             if (data.Files.length > 0) {
                 if (data.Files.length > vm.paginationValue) {
-                    vm.paginateData = data.Files;
+                    vm.paginateData[hrefVal] = data.Files;
                     html += loadHtmlWithPagination(hrefVal, 'innerCall');
                 }
                 else {
                     for (var i = 0; i < data.Files.length; i++) {
-                        html += `<li class="file-li"><span class="full-display" ng-click='vm.viewFile("` + encrypt(data.Files[i].Path) + `" , "` + data.Files[i].Ext + `", $event);$event.stopPropagation();$event.preventDefault();'><img class ="height-17 margin-right-5" src="images/file.png" /><span>` + data.Files[i].Name + `</span></span></li>`
+                        html += `<li class="file-li"><span class="full-display" ng-click='vm.viewFile("` + encrypt(data.Files[i].Path) + `", "` + data.Files[i].Ext + `", "` + data.Files[i].Name + `", $event);$event.stopPropagation();$event.preventDefault();'><img class ="height-17 margin-right-5" src="images/file.png" /><span>` + data.Files[i].Name + `</span></span></li>`
                     }
                 }
             }
@@ -134,22 +136,21 @@
             getFolderDetails(path, false, stringToAppend, hrefVal, element);
         }
 
-        function viewFile(path, ext, object) {
+        function viewFile(path, ext, name, object) {
             var html = ``,
                 memeType = '';
 
             var element = angular.element(object.target);
             showMiniLoader(element);
-            CustomRepository.getFile({ sDir: decrypt(path), ext: ext }, function (response) {
+            CustomRepository.getFile({ sDir: decrypt(path), ext: ext, name: name }, function (response) {
                 if (!response.status)
                     return;
 
                 $("#file-container").html('');
+                $("#c").remove();
+                $("#file-container").after('<canvas id="c"></canvas>');
 
-                if ($('#c').length == 0)
-                    $("#file-container").after('<canvas id="c"></canvas>');
-
-                if (ext == 'jpg' || ext == 'tif') {
+                if (ext == 'jpg' || ext == 'tif' || ext == 'png') {
                     var id = 'image';
                     vm.currentViewFileType = '#' + id;
                     b64toBlob(response.data.stream, 'image/png').then(function (resp) {
@@ -184,7 +185,6 @@
 	                                focal: e
 	                            });
 	                        });
-	    
 	                    }
 	                    img.src = vm.currentBase;
                     });
